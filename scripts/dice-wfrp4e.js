@@ -29,9 +29,9 @@ class DiceWFRP
 
     var sceneStress = "challenging";
     // Overrides default difficulty to Average depending on module setting and combat state
-    if (game.settings.get("wfrp4e", "testDefaultDifficulty") && (game.combat != null))
+    if (game.settings.get("dh2e", "testDefaultDifficulty") && (game.combat != null))
       sceneStress = game.combat.started ? "challenging" : "average";
-    else if (game.settings.get("wfrp4e", "testDefaultDifficulty"))
+    else if (game.settings.get("dh2e", "testDefaultDifficulty"))
       sceneStress = "average";
 
     // Merge input with generic properties constant between all tests
@@ -44,9 +44,9 @@ class DiceWFRP
     });
 
     // Sets/overrides default test difficulty (eg, with Income or Rest & Recover tests), based on dialogOptions.data.testDifficulty passed through from skillSetup
-    sceneStress = dialogOptions.data.testDifficulty || sceneStress; 
+    sceneStress = dialogOptions.data.testDifficulty || sceneStress;
 
-    let advantageBonus = game.settings.get("wfrp4e", "autoFillAdvantage") ? (dialogOptions.data.advantage * 10 || 0) : 0
+    let advantageBonus = game.settings.get("dh2e", "autoFillAdvantage") ? (dialogOptions.data.advantage * 10 || 0) : 0
 
     mergeObject(dialogOptions.data,
     {
@@ -74,7 +74,7 @@ class DiceWFRP
     dialogOptions.data.rollMode = rollMode;
     if (CONFIG.Dice.rollModes)
       dialogOptions.data.rollModes = CONFIG.Dice.rollModes;
-    else 
+    else
       dialogOptions.data.rollModes = CONFIG.rollModes;
 
 
@@ -99,13 +99,13 @@ class DiceWFRP
         }).render(true);
       });
     }
-    else 
+    else
     {
       testData.testModifier = testData.extra.options.testModifier || testData.testModifier
       testData.target = testData.target + testData.testModifier;
       testData.slBonus = testData.extra.options.slBonus || testData.slBonus
       testData.successBonus = testData.extra.options.successBonus || testData.successBonus
-      cardOptions.rollMode = testData.extra.options.rollMode || rollMode      
+      cardOptions.rollMode = testData.extra.options.rollMode || rollMode
       roll(testData, cardOptions)
     }
   }
@@ -113,10 +113,10 @@ class DiceWFRP
 
   /**
    * Provides the basic evaluation of a test.
-   * 
+   *
    * This function, when given the necessary data (target number, SL bonus, etc.) provides the
    * basic test evaluation - rolling the test (if not already given), determining SL, success, description, critical/fumble if needed.
-   * 
+   *
    * @param {Object} testData  Test info: target number, SL bonus, success bonus, (opt) roll, etc
    */
   static rollTest(testData)
@@ -189,7 +189,7 @@ class DiceWFRP
     else if (roll.total <= 5 || roll.total <= targetNum)
     {
       description = game.i18n.localize("Success")
-      if (game.settings.get("wfrp4e", "fastSL"))
+      if (game.settings.get("dh2e", "fastSL"))
       {
         let rollString = roll.total.toString();
         if (rollString.length == 2)
@@ -230,7 +230,7 @@ class DiceWFRP
         description = game.i18n.localize("Marginal") + " " + game.i18n.localize("Success");
 
       // Add 1 SL for each whole 10 the target number is above 100 (120 target: +2 SL) if the option is selected
-      if (game.settings.get("wfrp4e", "testAbove100"))
+      if (game.settings.get("dh2e", "testAbove100"))
       {
         if (targetNum > 100)
         {
@@ -292,7 +292,7 @@ class DiceWFRP
     }
 
     // If optional rule of criticals/fumbles on all tessts - assign Astounding Success/Failure accordingly
-    if (game.settings.get("wfrp4e", "criticalsFumblesOnAllTests") && !testData.hitLocation)
+    if (game.settings.get("dh2e", "criticalsFumblesOnAllTests") && !testData.hitLocation)
     {
       if (roll.total > targetNum && roll.total % 11 == 0 || roll.total == 100)
       {
@@ -310,11 +310,11 @@ class DiceWFRP
 
   /**
    * Extends the basic evaluation of a test to include weapon considerations.
-   * 
+   *
    * This function, when given the necessary data (target number, SL bonus, etc.)calls
    * rollTest to provide the basic evaluation, then extends that to mainly account for
    * qualities/flaws of the weapon
-   * 
+   *
    * @param {Object} testData  Test info: weapon, target number, SL bonus, success bonus, etc
    */
   static rollWeaponTest(testData)
@@ -399,11 +399,11 @@ class DiceWFRP
 
   /**
    * Extends the basic evaluation of a test to include spell considerations.
-   * 
+   *
    * This function, when given the necessary data (target number, SL bonus, etc.)calls
    * rollTest to provide the basic evaluation, then extends that to mainly account for
    * miscasting or critical castings
-   * 
+   *
    * @param {Object} testData  Test info: spell, target number, SL bonus, success bonus, etc
    */
   static rollCastTest(testData)
@@ -416,7 +416,7 @@ class DiceWFRP
 
     let CNtoUse = spell.data.cn.value
     // Partial channelling - reduce CN by SL so far
-    if (game.settings.get("wfrp4e", "partialChannelling"))
+    if (game.settings.get("dh2e", "partialChannelling"))
     {
       CNtoUse -=  spell.data.cn.SL;
     }
@@ -471,7 +471,7 @@ class DiceWFRP
       let overcasts = Math.floor(slOver / 2);
       testResults.overcasts = overcasts;
       spell.overcasts.available = overcasts;
-      
+
 
       if (testResults.roll % 11 == 0)
       {
@@ -536,11 +536,11 @@ class DiceWFRP
 
   /**
    * Extends the basic evaluation of a test to include spell considerations.
-   * 
+   *
    * This function, when given the necessary data (target number, SL bonus, etc.)calls
    * rollTest to provide the basic evaluation, then extends that to mainly account for
    * miscasting or critical castings
-   * 
+   *
    * @param {Object} testData  Test info: spell, target number, SL bonus, success bonus, etc
    */
   static rollChannellTest(testData, actor)
@@ -566,7 +566,7 @@ class DiceWFRP
     if (testResults.description.includes(game.i18n.localize("Failure")))
     {
       // Optional Rule: If SL in extended test is -/+0, counts as -/+1
-      if (Number(SL) == 0 && game.settings.get("wfrp4e", "extendedTests"))
+      if (Number(SL) == 0 && game.settings.get("dh2e", "extendedTests"))
         SL = -1;
 
       testResults.description = game.i18n.localize("ROLL.ChannelFailed")
@@ -580,11 +580,11 @@ class DiceWFRP
     else // Successs - add SL to spell for further use
     {
       testResults.description = game.i18n.localize("ROLL.ChannelSuccess")
-    
+
       // Optional Rule: If SL in extended test is -/+0, counts as -/+1
-      if (Number(SL) == 0 && game.settings.get("wfrp4e", "extendedTests"))
+      if (Number(SL) == 0 && game.settings.get("dh2e", "extendedTests"))
         SL = 1;
-    
+
       // Critical Channel - miscast and set SL gained to CN
       if (testResults.roll % 11 == 0)
       {
@@ -595,14 +595,14 @@ class DiceWFRP
           miscastCounter++;
       }
     }
-    
+
     // Add SL to CN and update actor
     SL = spell.data.cn.SL + Number(SL);
     if (SL > spell.data.cn.value)
       SL = spell.data.cn.value;
     else if ( SL < 0)
       SL = 0;
-    
+
     actor.updateEmbeddedEntity("OwnedItem",
     {
       _id: spell._id,
@@ -631,7 +631,7 @@ class DiceWFRP
         testResults.extra.majormis = game.i18n.localize("ROLL.MajorMis")
         break;
 	}
-	
+
     if (testData.extra.ingredient)
       miscastCounter--;
     if (miscastCounter < 0)
@@ -643,11 +643,11 @@ class DiceWFRP
 
   /**
    * Extends the basic evaluation of a test to include prayer considerations.
-   * 
+   *
    * This function, when given the necessary data (target number, SL bonus, etc.)calls
    * rollTest to provide the basic evaluation, then extends that to mainly account for
    * wrath of the gods
-   * 
+   *
    * @param {Object} testData  Test info: prayer, target number, SL bonus, success bonus, etc
    */
   static rollPrayTest(testData, actor)
@@ -691,7 +691,7 @@ class DiceWFRP
     {
       testResults.description = game.i18n.localize("ROLL.PrayGranted")
 
-      // Wrath of the gads activates if ones digit is equal or less than current sin      
+      // Wrath of the gads activates if ones digit is equal or less than current sin
       let unitResult = Number(testResults.roll.toString().split('').pop())
       if (unitResult == 0)
         unitResult = 10;
@@ -724,9 +724,9 @@ class DiceWFRP
   }
 
   /** Take roll data and display it in a chat card template.
-   * 
-   * 
-   * 
+   *
+   *
+   *
    * @param {Object} chatOptions - Object concerning display of the card like the template or which actor is testing
    * @param {Object} testData - Test results, values to display, etc.
    * @param {Object} rerenderMessage - Message object to be updated, instead of rendering a new message
@@ -735,7 +735,7 @@ class DiceWFRP
   {
 
     // Blank if manual chat cards
-    if (game.settings.get("wfrp4e", "manualChatCards") && !rerenderMessage)
+    if (game.settings.get("dh2e", "manualChatCards") && !rerenderMessage)
       testData.roll = testData.SL = null;
 
     if (game.modules.get("dice-so-nice") && game.modules.get("dice-so-nice").active)
@@ -776,7 +776,7 @@ class DiceWFRP
       return renderTemplate(chatOptions.template, chatData).then(html =>
       {
         // Emit the HTML as a chat message
-        if (game.settings.get("wfrp4e", "manualChatCards"))
+        if (game.settings.get("dh2e", "manualChatCards"))
         {
           let blank = $(html)
           let elementsToToggle = blank.find(".display-toggle")
@@ -793,11 +793,11 @@ class DiceWFRP
 
         chatOptions["content"] = html;
         if (chatOptions.sound)
-          console.log(`wfrp4e | Playing Sound: ${chatOptions.sound}`)
+          console.log(`dh2e | Playing Sound: ${chatOptions.sound}`)
         return ChatMessage.create(chatOptions, false);
       });
     }
-    else // Update message 
+    else // Update message
     {
       // Generate HTML from the requested chat template
       return renderTemplate(chatOptions.template, chatData).then(html =>
@@ -806,8 +806,8 @@ class DiceWFRP
         // Emit the HTML as a chat message
         chatOptions["content"] = html;
         if (chatOptions.sound)
-        { 
-          console.log(`wfrp4e | Playing Sound: ${chatOptions.sound}`)
+        {
+          console.log(`dh2e | Playing Sound: ${chatOptions.sound}`)
           AudioHelper.play({src : chatOptions.sound}, true)
         }
         return rerenderMessage.update(
@@ -1044,7 +1044,7 @@ class DiceWFRP
         let cardContent =  $(event.currentTarget).parents('.message-content')
 
         cardContent.find(".overcast-count").text(`${overcastData.available}/${msg.data.flags.data.postData.overcasts}`)
-        
+
         if (overcastData[overcastChoice].AoE)
           cardContent.find(`.overcast-value.${overcastChoice}`)[0].innerHTML = ('<i class="fas fa-ruler-combined"></i> ' + overcastData[overcastChoice].current + " " + overcastData[overcastChoice].unit)
         else
@@ -1076,7 +1076,7 @@ class DiceWFRP
             else
               cardContent.find(`.overcast-value.${overcastType}`)[0].innerHTML = (overcastData[overcastType].current + " " + overcastData[overcastType].unit)
           }
-       
+
         }
         overcastData.available = msg.data.flags.data.postData.overcasts;
         cardContent.find(".overcast-count").text(`${overcastData.available}/${msg.data.flags.data.postData.overcasts}`)
@@ -1213,7 +1213,7 @@ class DiceWFRP
 
   /**
    * Toggles a chat card from to edit mode - switches to using <input>
-   * 
+   *
    * @param {Object} html  chat card html
    */
   static toggleEditable(html)
@@ -1277,8 +1277,8 @@ class DiceWFRP
 
   /**
    * Add support for the Dice So Nice module
-   * @param {Object} roll 
-   * @param {String} rollMode 
+   * @param {Object} roll
+   * @param {String} rollMode
    */
   static async showDiceSoNice(roll,rollMode)
   {

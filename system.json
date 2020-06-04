@@ -1,9 +1,9 @@
 {
-  "name": "wfrp4e",
-  "title": "Warhammer Fantasy Roleplay 4th Edition",
-  "description": "A comprehensive system for running grim and perilious games of Warhammer Fantasy Roleplay in the Foundry VTT environment.",
-  "version": "1.5.4",
-  "author": "CatoThe1stElder, Moo Man",
+  "name": "dh2e",
+  "title": "Dark Heresey 2nd Edition",
+  "description": "A WIP port.",
+  "version": "0.1.0",
+  "author": "CatoThe1stElder, Moo Man, Giddy",
   "scripts": [
     "./scripts/config-wfrp4e.js",
     "./scripts/dice-wfrp4e.js",
@@ -51,8 +51,8 @@
   	{
       "name": "bestiary",
       "label": "Bestiary",
-      "system": "wfrp4e",
-      "module": "wfrp4e",
+      "system": "dh2e",
+      "module": "dh2e",
       "path": "./packs/bestiary.db",
       "entity": "Actor",
       "tag" : "actor"
@@ -60,8 +60,8 @@
     {
       "name": "careers",
       "label": "Careers",
-      "system": "wfrp4e",
-      "module": "wfrp4e",
+      "system": "dh2e",
+      "module": "dh2e",
       "path": "./packs/careers.db",
       "entity": "Item",
       "tag" : "career"
@@ -69,8 +69,8 @@
     {
       "name": "criticals",
       "label": "Criticals",
-      "system": "wfrp4e",
-      "module": "wfrp4e",
+      "system": "dh2e",
+      "module": "dh2e",
       "path": "./packs/criticals.db",
       "entity": "Item",
       "tag" : "critical"
@@ -79,8 +79,8 @@
   	 {
       "name": "skills",
       "label": "Skills",
-      "system": "wfrp4e",
-      "module": "wfrp4e",
+      "system": "dh2e",
+      "module": "dh2e",
       "path": "./packs/skills.db",
       "entity": "Item",
       "tag" : "skill"
@@ -88,8 +88,8 @@
     {
       "name": "talents",
       "label": "Talents",
-      "system": "wfrp4e",
-      "module": "wfrp4e",
+      "system": "dh2e",
+      "module": "dh2e",
       "path": "./packs/talents.db",
       "entity": "Item",
       "tag" : "talent"
@@ -97,8 +97,8 @@
     {
       "name": "traits",
       "label": "Traits",
-      "system": "wfrp4e",
-      "module": "wfrp4e",
+      "system": "dh2e",
+      "module": "dh2e",
       "path": "./packs/traits.db",
       "entity": "Item",
       "tag" : "trait"
@@ -108,8 +108,8 @@
       "label": "Psychologies",
       "path": "./packs/psychologies.db",
       "entity": "Item",
-      "module": "wfrp4e",
-      "system": "wfrp4e",
+      "module": "dh2e",
+      "system": "dh2e",
       "tag" : "pyschology"
     },
     {
@@ -117,8 +117,8 @@
       "label": "Mutations",
       "path": "./packs/mutations.db",
       "entity": "Item",
-      "module": "wfrp4e",
-      "system": "wfrp4e",
+      "module": "dh2e",
+      "system": "dh2e",
       "tag" : "mutation"
     },
     {
@@ -126,8 +126,8 @@
       "label": "Injuries",
       "path": "./packs/injuries.db",
       "entity": "Item",
-      "module": "wfrp4e",
-      "system": "wfrp4e",
+      "module": "dh2e",
+      "system": "dh2e",
       "tag" : "injury"
     },
     {
@@ -135,8 +135,8 @@
       "label": "Diseases",
       "path": "./packs/diseases.db",
       "entity": "Item",
-      "module": "wfrp4e",
-      "system": "wfrp4e",
+      "module": "dh2e",
+      "system": "dh2e",
       "tag" : "disease"
     },
     {
@@ -144,8 +144,8 @@
       "label": "Spells",
       "path": "./packs/spells.db",
       "entity": "Item",
-      "module": "wfrp4e",
-      "system": "wfrp4e",
+      "module": "dh2e",
+      "system": "dh2e",
       "tag" : "spell"
     },
 	{
@@ -153,8 +153,8 @@
       "label": "Prayers",
       "path": "./packs/prayers.db",
       "entity": "Item",
-      "module": "wfrp4e",
-      "system": "wfrp4e",
+      "module": "dh2e",
+      "system": "dh2e",
       "tag" : "prayer"
     },
     {
@@ -162,8 +162,8 @@
       "label": "Trappings",
       "path": "./packs/trappings.db",
       "entity": "Item",
-      "module": "wfrp4e",
-      "system": "wfrp4e",
+      "module": "dh2e",
+      "system": "dh2e",
       "tag" : "trapping"
     }
   ],

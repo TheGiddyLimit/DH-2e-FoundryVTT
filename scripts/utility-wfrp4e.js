@@ -10,12 +10,12 @@ class WFRP_Utility
 {
   /**
    * Augments the spell item's description with the lore effect
-   * 
+   *
    * The spell's lore is added at the end of the spell's description for
    * an easy reminder. However, this causes issues because we don't want
    * the lore to be 'saved' in the description. So we append the lore
    * if it does not already exist
-   * 
+   *
    * @param {Object} spell 'spell' type item
    */
   static _spellDescription(spell)
@@ -36,7 +36,7 @@ class WFRP_Utility
   /**
    * Used when preparing armour - every time an armour item is prepared it's added as a layer. Each
    * layer has booleans for qualities/flaws and an AP value
-   * 
+   *
    * @param {Object} AP     AP object defined in actor preparation (see ActorWfrp4e.prepareItems()) - consists of layers
    * @param {Object} armor  'armour' Item type - armour layer that is being added
    * @param {String} loc    Location key to lookup AP value at that location
@@ -61,8 +61,8 @@ class WFRP_Utility
 
   /**
    * Sorts qualities and flaws into an array of strings.
-   * 
-   * @param {Object}  item                Weapon/armor with qualities/flaws.  
+   *
+   * @param {Object}  item                Weapon/armor with qualities/flaws.
    * @param {Boolean} includeQualities    Whether to include qualities (false if skill not present)
    */
   static _prepareQualitiesFlaws(item, includeQualities = true)
@@ -101,8 +101,8 @@ class WFRP_Utility
 
   /**
    * Sorts qualities and flaws into a more organized object.
-   * 
-   * @param {Array} properties    Array of strings listing qualities/flaws 
+   *
+   * @param {Array} properties    Array of strings listing qualities/flaws
    */
   static _separateQualitiesFlaws(properties)
   {
@@ -129,7 +129,7 @@ class WFRP_Utility
 
   /**
    * Roll characteristics given a species, or take average depending input
-   * 
+   *
    * @param {string} species      Key or value for species in config
    * @param {bool} average        Take average or not
    */
@@ -145,7 +145,7 @@ class WFRP_Utility
     catch (error)
     {
       ui.notifications.info("Could not find species " + species)
-      console.log("wfrp4e | Could not find species " + species + ": " + error);
+      console.log("dh2e | Could not find species " + species + ": " + error);
       throw error
     }
 
@@ -166,7 +166,7 @@ class WFRP_Utility
 
   /**
    * Retrieves species movement value from config.
-   * 
+   *
    * @param {String} species  species key for lookup
    */
   static speciesMovement(species)
@@ -179,7 +179,7 @@ class WFRP_Utility
 
   /**
    * Searches an object for a key that matches the given value.
-   * 
+   *
    * @param {String} value  value whose key is being searched for
    * @param {Object} obj    object to be searched in
    */
@@ -195,17 +195,17 @@ class WFRP_Utility
 
   /**
    * Specialized function to find a skill that accommodates for specializations.
-   * 
+   *
    * Special considerations needs to be provided for finding skills because of specializations.
    * First, it will try to find the skill exactly, if that cannot be found, remove the specialization
-   * and try to find any skill that would match if it had no specialization. If it is found, it will 
+   * and try to find any skill that would match if it had no specialization. If it is found, it will
    * return that skill, renaming it to match the query.
-   * 
+   *
    * For example, input could be Lore (Cheese), which doesn't exist. So it will try again testing
-   * with just the skill "Lore", and trying to match it with any other skill by removing its 
-   * specialization as well. Thus, lore matches with the first Lore skill, which should be 
+   * with just the skill "Lore", and trying to match it with any other skill by removing its
+   * specialization as well. Thus, lore matches with the first Lore skill, which should be
    * the blank "Lore ()" skill. This is renamed as Lore (Cheese) and returned.
-   * 
+   *
    * @param {String} skillName skill name to be searched for
    */
   static async findSkill(skillName)
@@ -238,17 +238,17 @@ class WFRP_Utility
 
   /**
    * Specialized function to find a talent that accommodates for specializations.
-   * 
+   *
    * Special considerations needs to be provided for finding talents because of specializations.
    * First, it will try to find the talent exactly, if that cannot be found, remove the specialization
-   * and try to find any talent that would match if it had no specialization. If it is found, it will 
+   * and try to find any talent that would match if it had no specialization. If it is found, it will
    * return that talent, renaming it to match the query.
-   * 
+   *
    * For example, input could be Etiquette (Cheesemongers), which doesn't exist. So it will try again testing
-   * with just the talent "Etiquette", and trying to match it with any other talent by removing its 
-   * specialization as well. Thus, Etiquette matches with the first Etiquette talent, which should be 
+   * with just the talent "Etiquette", and trying to match it with any other talent by removing its
+   * specialization as well. Thus, Etiquette matches with the first Etiquette talent, which should be
    * the blank "Etiquette ()" talent. This is renamed as Etiquette (Cheesemongers) and returned.
-   * 
+   *
    * @param {String} talentName talent name to be searched for
    */
   static async findTalent(talentName)
@@ -280,10 +280,10 @@ class WFRP_Utility
 
 
   /**
-   * 
-   * @param {String} itemName   Item name to be searched for 
+   *
+   * @param {String} itemName   Item name to be searched for
    * @param {String} itemType   Item's type (armour, weapon, etc.)
-   * @param {String} location   Compendium to look into, format: <package.name> - "wfrp4e.trappings"
+   * @param {String} location   Compendium to look into, format: <package.name> - "dh2e.trappings"
    */
   static async findItem(itemName, itemType, location = null)
   {
@@ -362,8 +362,8 @@ class WFRP_Utility
 
   /**
    * Looks up advancement cost based on current advancement and type.
-   * 
-   * @param {var} currentAdvances   Number of advances currently 
+   *
+   * @param {var} currentAdvances   Number of advances currently
    * @param {String} type           "characteristic" or "skill"
    */
   static _calculateAdvCost(currentAdvances, type)
@@ -378,7 +378,7 @@ class WFRP_Utility
 
   /**
    * Creates a chat message with current conditions and penalties to an actor.
-   * 
+   *
    * @param {String} tokenId  Token id to retrieve token from canvas
    * @param {Object} round    Round object to display round number
    */
@@ -397,7 +397,7 @@ class WFRP_Utility
     };
     if (["gmroll", "blindroll"].includes(chatOptions.rollMode)) chatOptions["whisper"] = ChatMessage.getWhisperIDs("GM");
     if (chatOptions.rollMode === "blindroll") chatOptions["blind"] = true;
-    chatOptions["template"] = "systems/wfrp4e/templates/chat/combat-status.html"
+    chatOptions["template"] = "systems/dh2e/templates/chat/combat-status.html"
 
 
     let chatData = {
@@ -423,7 +423,7 @@ class WFRP_Utility
 
   /**
    * Displays all combatants with conditions effecting them, used at the end of the Round.
-   * 
+   *
    * @param {Object} combat  FVTT combat object listing all combatants
    */
   static displayRoundSummary(combat)
@@ -446,7 +446,7 @@ class WFRP_Utility
     };
     if (["gmroll", "blindroll"].includes(chatOptions.rollMode)) chatOptions["whisper"] = ChatMessage.getWhisperIDs("GM");
     if (chatOptions.rollMode === "blindroll") chatOptions["blind"] = true;
-    chatOptions["template"] = "systems/wfrp4e/templates/chat/round-summary.html"
+    chatOptions["template"] = "systems/dh2e/templates/chat/round-summary.html"
 
 
     let chatData = {
@@ -469,13 +469,13 @@ class WFRP_Utility
 
   /**
    * Parses effect file paths into more readable conditions.
-   * 
+   *
    * Currently, effects don't have names, just filepaths to the icon. This function sorts an array
    * of filepaths into more a more readable list.
-   * 
-   * Example: Token has ".../bleeding5" and ".../bleeding1", and ".../entangled5", this is turned into 
+   *
+   * Example: Token has ".../bleeding5" and ".../bleeding1", and ".../entangled5", this is turned into
    * the array ["Bleeding 6", "Entangled 5"] and returned.
-   * 
+   *
    * @param {Array} effectList List of status effects (png file paths) currently affecting the target
    */
   static parseConditions(effectList)
@@ -520,7 +520,7 @@ class WFRP_Utility
 
   /**
    * Posts the symptom effects, then secretly posts the treatment to the GM.
-   * 
+   *
    * @param {String} symptom  symptom name to be posted
    */
   static postSymptom(symptom)
@@ -551,7 +551,7 @@ class WFRP_Utility
 
   /**
    * Posts the definition of a quality or flaw to chat.
-   * 
+   *
    * @param {String} property   name of the quality or flaw
    */
   static postProperty(property)
@@ -581,7 +581,7 @@ class WFRP_Utility
   /**
    * Helper function to easily find the property name
    * // Todo: regex?
-   * @param {String} property 
+   * @param {String} property
    */
   static parsePropertyName(property)
   {
@@ -594,10 +594,10 @@ class WFRP_Utility
 
   /**
    * Helper function to set up chat data (set roll mode and content).
-   * 
-   * @param {String} content 
-   * @param {String} modeOverride 
-   * @param {Boolean} isRoll 
+   *
+   * @param {String} content
+   * @param {String} modeOverride
+   * @param {Boolean} isRoll
    */
   static chatDataSetup(content, modeOverride, isRoll = false, forceWhisper)
   {
@@ -623,9 +623,9 @@ class WFRP_Utility
 
   /**
    * Looks through object values and finds the one that most closely matches the query, returning the key.
-   * 
+   *
    * Used by condition lookup.
-   * 
+   *
    * @param {Object} Object Object being searched in
    * @param {*} query Value trying to match
    */
@@ -655,7 +655,7 @@ class WFRP_Utility
 
   /**
    * Returns token speaker if available, otherwise, returns actor.
-   * 
+   *
    * @param {Object} speaker  speaker object containing actor and otken
    */
   static getSpeaker(speaker)
@@ -673,7 +673,7 @@ class WFRP_Utility
   {
     let returnSkills = [];
 
-    const pack = game.packs.find(p => p.collection == "wfrp4e.skills")
+    const pack = game.packs.find(p => p.collection == "dh2e.skills")
     let skills = [];
     await pack.getIndex().then(index => skills = index);
     for (let sk of skills)
@@ -702,7 +702,7 @@ class WFRP_Utility
   static async allMoneyItems()
   {
     let moneyItems = []
-    const trappings = game.packs.find(p => p.collection == "wfrp4e.trappings")
+    const trappings = game.packs.find(p => p.collection == "dh2e.trappings")
     let trappingsIndex = [];
     await trappings.getIndex().then(index => trappingsIndex = index);
 
@@ -718,7 +718,7 @@ class WFRP_Utility
 
   /**
    * Converts custom entity to clickable html element.
-   * 
+   *
    * @param {String} match Entire string being converted (@Roll["1d8"])
    * @param {String} entityType Custom entity type - Roll, Table, etc
    * @param {String} id Input given in the custom link "1d8" above
@@ -743,7 +743,7 @@ class WFRP_Utility
 
   /**
    * Collects data from the table click event and sends it to WFRP_Tables to be rolled.
-   * 
+   *
    * @param {Object} event  click event
    */
   static handleTableClick(event)
@@ -784,7 +784,7 @@ class WFRP_Utility
     // If right click, open table modifier menu
     else if (event.button == 2)
     {
-      renderTemplate('systems/wfrp4e/templates/chat/table-dialog.html').then(html =>
+      renderTemplate('systems/dh2e/templates/chat/table-dialog.html').then(html =>
       {
         new Dialog(
         {
@@ -820,7 +820,7 @@ class WFRP_Utility
 
   /**
    * Post condition when clicked.
-   * 
+   *
    * @param {Object} event click event
    */
   static handleConditionClick(event)
@@ -839,7 +839,7 @@ class WFRP_Utility
 
   /**
    * Post symptom when clicked
-   * 
+   *
    * @param {Object} event click event
    */
   static handleSymptomClick(event)
@@ -852,7 +852,7 @@ class WFRP_Utility
 
   /**
    * Roll to chat when roll entity is clicked
-   * 
+   *
    * @param {Object} event clicke event
    */
   static handleRollClick(event)
@@ -871,7 +871,7 @@ class WFRP_Utility
 
     /**
    * Handle a payment entity link
-   * 
+   *
    * @param {Object} event clicke event
    */
   static handlePayClick(event)
@@ -884,7 +884,7 @@ class WFRP_Utility
   /**
    * Retrieves the item being requested by the macro from the selected actor,
    * sending it to the correct setup____ function to be rolled.
-   * 
+   *
    * @param {String} itemName name of item being rolled
    * @param {String} itemType type of item ("weapon", "spell", etc)
    */
@@ -926,9 +926,9 @@ class WFRP_Utility
 
   static async toggleMorrslieb()
   {
-    let morrsliebActive = canvas.scene.getFlag("wfrp4e", "morrslieb")
+    let morrsliebActive = canvas.scene.getFlag("dh2e", "morrslieb")
     morrsliebActive = !morrsliebActive
-    await canvas.scene.setFlag("wfrp4e", "morrslieb", morrsliebActive)
+    await canvas.scene.setFlag("dh2e", "morrslieb", morrsliebActive)
 
     if (game.modules.get("fxmaster") && game.modules.get("fxmaster").active)
     {
@@ -945,7 +945,7 @@ class WFRP_Utility
             }
           }
         }
-        else 
+        else
         {
           filters["morrslieb"] = {
             type: "color",
@@ -961,9 +961,9 @@ class WFRP_Utility
         })
 
       }
-      else 
+      else
       {
-        game.socket.emit("system.wfrp4e", {
+        game.socket.emit("system.dh2e", {
           type : "morrslieb"
         })
         canvas.draw();
@@ -980,4 +980,4 @@ class WFRP_Utility
       label.text("Upload Disabled");
       label.attr("title", "Upload disabled while in system directory. DO NOT put your assets within any system or module folder.");
     }
-  })  
+  })

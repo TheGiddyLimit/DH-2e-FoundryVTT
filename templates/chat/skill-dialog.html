@@ -1,5 +1,5 @@
 <form class="skill-test">
-  {{> systems/wfrp4e/templates/chat/dialog-constant.html}}
+  {{> systems/dh2e/templates/chat/dialog-constant.html}}
 
   <div class="form-group custom-select">
     <label>{{localize "Characteristic"}}</label>
@@ -13,7 +13,7 @@
   </div>
 
   <div class="form-group">
-    <label title="{{localize 'DIALOG.HitLocation'}}">{{localize "ROLL.HitLocation"}} 
+    <label title="{{localize 'DIALOG.HitLocation'}}">{{localize "ROLL.HitLocation"}}
       <input type="checkbox" name="hitLocation" {{checked hitLocation}} />
     </label>
   </div>
@@ -25,23 +25,23 @@
   textContainer = document.querySelectorAll('.app.window-app.dialog');
   length = textContainer.length;
 
-  
-  
-  
+
+
+
 
   for (i = 0; i < length; i++) {
     if (textContainer[i].children[1].children[0].children[0].className.includes("skill-test")) {
       new_red = textContainer[i].id;
-      
-      
+
+
       if (document.getElementById(new_red).className.includes("skill-roll-dialog")) {
         continue;
-      } 
+      }
       else {
         document.getElementById(new_red).className += " skill-roll-dialog";
       }
     } else {}
   }
 
-  
+
 </script>

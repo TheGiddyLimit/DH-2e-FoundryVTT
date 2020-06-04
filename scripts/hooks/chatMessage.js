@@ -70,7 +70,7 @@ Hooks.on("chatMessage", (html, content, msg) => {
      */
     function getOption(optionInCommandLine) {
       return (typeof optionInCommandLine == "undefined") ? WFRP4E.creditOptions.SPLIT : optionInCommandLine;
-    }    
+    }
 
 // Roll on a table
     if (command === "/table") {
@@ -189,7 +189,7 @@ Hooks.on("chatMessage", (html, content, msg) => {
 
         let link = game.i18n.format("CHAT.CommandLine.Help.Link", {link: "https://github.com/CatoThe1stElder/WFRP-4th-Edition-FoundryVTT/wiki"})
 
-        renderTemplate("systems/wfrp4e/templates/chat/chat-help-command.html", {
+        renderTemplate("systems/dh2e/templates/chat/chat-help-command.html", {
             commands: commandElements,
             link: link
         }).then(html => {

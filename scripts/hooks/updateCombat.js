@@ -5,17 +5,17 @@ Hooks.on("updateCombat", (combat) => {
     if (game.user.isGM && combat.data.round != 0 && combat.turns && combat.data.active)
     {
       let turn = combat.turns.find(t => t.tokenId == combat.current.tokenId)
-  
-      if (game.settings.get("wfrp4e", "displayRoundSummary") && combat.current.turn == 0 && combat.current.round != 1)
+
+      if (game.settings.get("dh2e", "displayRoundSummary") && combat.current.turn == 0 && combat.current.round != 1)
         WFRP_Utility.displayRoundSummary(combat)
 
-      if (game.settings.get("wfrp4e", "statusOnTurnStart"))
+      if (game.settings.get("dh2e", "statusOnTurnStart"))
         WFRP_Utility.displayStatus(turn.token._id, combat.data.round);
-  
-      if (game.settings.get("wfrp4e", "focusOnTurnStart"))
+
+      if (game.settings.get("dh2e", "focusOnTurnStart"))
       {
         canvas.tokens.get(turn.token._id).control();
-        canvas.tokens.cycleTokens(1, true);  
+        canvas.tokens.cycleTokens(1, true);
       }
 
       WFRP_Audio.PlayContextAudio({item : {type: 'round'}, action: "change"})

@@ -9,7 +9,7 @@
         <input class="filter" type="checkbox" data-filter="{{filter}}" {{checked value.value}}/> {{localize value.display}}
       </div>
       {{/each}}
-      
+
       <h2>{{localize "BROWSER.FilterOptions"}}</h2>
 
       <div class= "name filter-top">
@@ -93,16 +93,16 @@
         <input class="csv-filter qualitiesFlaws" type="text" data-filter="qualitiesFlaws" value="{{filters.dynamic.qualitiesFlaws.value}}"/>
       </div>
       <div  class = "protects filter-top" style = "display: none;">
-      {{localize "Protects"}}          
+      {{localize "Protects"}}
         <div>
           {{localize "Head"}} <input class="protects-filter" type = "checkbox" data-filter = "head" {{checked filters.dynamic.protects.value.head}}></input>
-        </div>          
+        </div>
         <div>
           {{localize "Body"}} <input class="protects-filter" type = "checkbox" data-filter = "body" {{checked filters.dynamic.protects.value.body}}></input>
-        </div>          
+        </div>
         <div>
           {{localize "Arms"}} <input class="protects-filter" type = "checkbox" data-filter = "arms" {{checked filters.dynamic.protects.value.arms}}></input>
-        </div>     
+        </div>
         <div>
           {{localize "Legs"}} <input class="protects-filter" type = "checkbox" data-filter = "legs" {{checked filters.dynamic.protects.value.legs}}></input>
         </div>
@@ -490,9 +490,9 @@
             <a class = "name-icon">
               <div class = "item-name">{{item.name}}</div>
               {{#if item.compendium}}
-              <div class="icon" title="Compendium Item" style="background-image: url(systems/wfrp4e/ui/sidebar-button-compendium-active.png)"></div>
+              <div class="icon" title="Compendium Item" style="background-image: url(systems/dh2e/ui/sidebar-button-compendium-active.png)"></div>
               {{else}}
-              <div class="icon" title="World Item" style="background-image: url(systems/wfrp4e/ui/sidebar-button-items.png)"></div>
+              <div class="icon" title="World Item" style="background-image: url(systems/dh2e/ui/sidebar-button-items.png)"></div>
               {{/if}}
 
             </a>

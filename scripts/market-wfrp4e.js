@@ -83,7 +83,7 @@ class MarketWfrp4e {
      */
     static generateSettlementChoice(rarity) {
         let cardData = {rarity: WFRP4E.availability[rarity]};
-        renderTemplate("systems/wfrp4e/templates/chat/market-settlement.html", cardData).then(html => {
+        renderTemplate("systems/dh2e/templates/chat/market-settlement.html", cardData).then(html => {
             let chatData = WFRP_Utility.chatDataSetup(html, "selfroll");
             ChatMessage.create(chatData);
         });
@@ -357,7 +357,7 @@ class MarketWfrp4e {
                 QtSS: parsedPayRequest.ss,
                 QtBP: parsedPayRequest.bp
             };
-            renderTemplate("systems/wfrp4e/templates/chat/market-pay.html", cardData).then(html => {
+            renderTemplate("systems/dh2e/templates/chat/market-pay.html", cardData).then(html => {
                 let chatData = WFRP_Utility.chatDataSetup(html, "roll");
                 ChatMessage.create(chatData);
             });
@@ -389,7 +389,7 @@ class MarketWfrp4e {
             }
             return {gc: gc, ss: ss, bp: bp};
         }
-        
+
         /**
          *
          * @param initialAmount {Object} {initialAmount.gc,initialAmount.ss,initialAmount.bp}
@@ -430,7 +430,7 @@ class MarketWfrp4e {
             let amount
             let nbActivePlayers = Array.from(game.users).filter(u => u.data.role != 4 && u.active).length;
             let forceWhisper
-            
+
             let message
             if (nbActivePlayers == 0)
             {
@@ -438,7 +438,7 @@ class MarketWfrp4e {
                 ChatMessage.create({content: message});
                 return
             }
-            else if (option.toLowerCase() ===WFRP4E.creditOptions.SPLIT.toLowerCase() ) 
+            else if (option.toLowerCase() ===WFRP4E.creditOptions.SPLIT.toLowerCase() )
             {
                 amount = splitAmountBetweenAllPlayers(parsedPayRequest, nbActivePlayers);
                 message =  game.i18n.format("MARKET.RequestMessageForSplitCredit", {
@@ -446,13 +446,13 @@ class MarketWfrp4e {
                     initialAmount: amountToString(parsedPayRequest)
                 });
             }
-            else if ( option.toLowerCase() === WFRP4E.creditOptions.EACH.toLowerCase() )  
+            else if ( option.toLowerCase() === WFRP4E.creditOptions.EACH.toLowerCase() )
             {
               amount = parsedPayRequest;
               message = game.i18n.format("MARKET.RequestMessageForEachCredit", {
                   activePlayerNumber: nbActivePlayers,
                   initialAmount: amountToString(parsedPayRequest)
-              });              
+              });
             }
             else
             {
@@ -464,12 +464,12 @@ class MarketWfrp4e {
                 message = game.i18n.format("MARKET.CreditToUser", {
                     userName: player[0].data.name,
                     initialAmount: amountToString(parsedPayRequest)
-                });              
+                });
               } else {
                 message = game.i18n.localize("MARKET.NoMatchingPlayer");
                 ChatMessage.create({content: message});
                 return
-              }              
+              }
             }
             let cardData = {
                 digestMessage: message,
@@ -478,7 +478,7 @@ class MarketWfrp4e {
                 QtSS: amount.ss,
                 QtBP: amount.bp
             };
-            renderTemplate("systems/wfrp4e/templates/chat/market-credit.html", cardData).then(html => {
+            renderTemplate("systems/dh2e/templates/chat/market-credit.html", cardData).then(html => {
                 let chatData = WFRP_Utility.chatDataSetup(html, "roll", false, forceWhisper);
                 ChatMessage.create(chatData);
             });

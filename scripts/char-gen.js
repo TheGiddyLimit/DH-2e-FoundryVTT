@@ -3,7 +3,7 @@
  * Each function usually corresponds with a specific action/button click, processing and rendering
  * a new card in response.
  */
-class GeneratorWfrp4e 
+class GeneratorWfrp4e
 {
   /**
    * The species stage is the first stage of character generation.
@@ -12,18 +12,18 @@ class GeneratorWfrp4e
    */
   static speciesStage()
   {
-    renderTemplate("systems/wfrp4e/templates/chat/chargen/species-select.html", {species : WFRP4E.species}).then(html => {
+    renderTemplate("systems/dh2e/templates/chat/chargen/species-select.html", {species : WFRP4E.species}).then(html => {
       let chatData = WFRP_Utility.chatDataSetup(html)
       ChatMessage.create(chatData);
     })
-  } 
+  }
 
   /**
    * This function is the response to the "Roll Species" button or specifically clicking on a species to select it.
-   * 
+   *
    * If species was chosen, the chosenSpecies argument is used, and no exp is given. Update the species selection
    * menu with the choice/roll result.
-   * 
+   *
    * @param {String} messageId ID of the species selection menu chat card
    * @param {String} chosenSpecies Key of the species specifically chosen, if any. Null if rolled.
    */
@@ -45,7 +45,7 @@ class GeneratorWfrp4e
     let updateCardData = {roll : roll, species : WFRP4E.species}
 
     // Update the species selection menu to show what was rolled/chosen
-    renderTemplate("systems/wfrp4e/templates/chat/chargen/species-select.html", updateCardData).then(html =>{
+    renderTemplate("systems/dh2e/templates/chat/chargen/species-select.html", updateCardData).then(html =>{
       speciesMessage.update({content: html})
     })
     // Once a species is selected/rolled, display characteristics rolled
@@ -54,9 +54,9 @@ class GeneratorWfrp4e
 
   /**
    * Display species characteristics + other attributes for the user to drag and drop onto their sheet.
-   * 
+   *
    * Also displays buttons to continue character generation.
-   * 
+   *
    * @param {String} species speciesKey for species selected
    * @param {Number} exp Experience received from random generation
    */
@@ -70,7 +70,7 @@ class GeneratorWfrp4e
       if (exp == 70)
         calcExp = exp-50;
     }
-    else 
+    else
       calcExp = exp + 50;
 
 
@@ -101,7 +101,7 @@ class GeneratorWfrp4e
     cardData.extra = WFRP4E.speciesExtra[species]
     cardData.move = WFRP4E.speciesMovement[species]
 
-    renderTemplate("systems/wfrp4e/templates/chat/chargen/attributes.html", cardData).then(html => {
+    renderTemplate("systems/dh2e/templates/chat/chargen/attributes.html", cardData).then(html => {
       let chatData = WFRP_Utility.chatDataSetup(html)
       chatData["flags.transfer"] = JSON.stringify(dataTransfer);
       ChatMessage.create(chatData);
@@ -111,7 +111,7 @@ class GeneratorWfrp4e
   /**
    * Shows the list of skills and talents for a species that the user can drag and drop
    * onto their sheet.
-   * 
+   *
    * @param {String} species Species key to determine which skills/talents to display
    * @param {Number} exp Exp from random generation so far
    */
@@ -146,7 +146,7 @@ class GeneratorWfrp4e
 
     cardData.speciesTalents = talents;
     cardData.choiceTalents = choiceTalents;
-    renderTemplate("systems/wfrp4e/templates/chat/chargen/species-skills-talents.html", cardData).then(html =>{
+    renderTemplate("systems/dh2e/templates/chat/chargen/species-skills-talents.html", cardData).then(html =>{
       let chatData = WFRP_Utility.chatDataSetup(html)
       ChatMessage.create(chatData);
     })
@@ -154,7 +154,7 @@ class GeneratorWfrp4e
 
   /**
    * Roll a career and display the instructions, as well as post the career to chat.
-   * 
+   *
    * @param {String} species Species key
    * @param {Number} exp Exp value to show
    * @param {Boolean} isReroll Whether this career is from a reroll
@@ -164,10 +164,10 @@ class GeneratorWfrp4e
     let roll = WFRP_Tables.rollTable("career", {}, species)
     this.displayCareer(roll.name, species, exp, isReroll)
   }
-  
+
   /**
    * Show the list of available to careers to choose from if the user does not want to roll.
-   * 
+   *
    * @param {String} species species key
    */
   static async chooseCareer(species)
@@ -187,7 +187,7 @@ class GeneratorWfrp4e
   /**
    * This displays the career rolled, but instead of displaying the tier 2 rank that matches the name,
    * it finds the tier 1 rank and posts that.
-   * 
+   *
    * @param {String} careerName Name of career to be posted
    * @param {String} species Species key
    * @param {Number} exp Exp from random generation
@@ -196,7 +196,7 @@ class GeneratorWfrp4e
    */
   static async displayCareer(careerName, species, exp, isReroll, isChosen)
   {
-    let pack = game.packs.find(p => p.collection == "wfrp4e.careers")
+    let pack = game.packs.find(p => p.collection == "dh2e.careers")
     let careers =  await pack.getContent();
     let careerFound;
     // Find the tier 1 rank that corresponds with the career name
@@ -219,7 +219,7 @@ class GeneratorWfrp4e
     }
 
     // Show card with instructions and button
-    renderTemplate("systems/wfrp4e/templates/chat/chargen/career-select.html", cardData).then(html => {
+    renderTemplate("systems/dh2e/templates/chat/chargen/career-select.html", cardData).then(html => {
       let chatData = WFRP_Utility.chatDataSetup(html)
       ChatMessage.create(chatData);
     })
@@ -227,7 +227,7 @@ class GeneratorWfrp4e
 
   /**
    * Generate details (hair/eye color, height, etc.) and display on a draggable card.
-   * 
+   *
    * @param {String} species Species key
    */
   static async rollDetails(species)
@@ -260,7 +260,7 @@ class GeneratorWfrp4e
         height : `${hFeet}'${hInches}`
       }
     }
-    
+
     let cardData = {
       species: WFRP4E.species[species],
       name : name,
@@ -270,7 +270,7 @@ class GeneratorWfrp4e
       height : `${hFeet}'${hInches}`
     }
 
-    renderTemplate(`systems/wfrp4e/templates/chat/chargen/details.html`, cardData).then(html => {
+    renderTemplate(`systems/dh2e/templates/chat/chargen/details.html`, cardData).then(html => {
       let chatData = WFRP_Utility.chatDataSetup(html)
       chatData["flags.transfer"] = JSON.stringify(dataTransfer);
       ChatMessage.create(chatData);

@@ -8,10 +8,10 @@ class NameGenWfrp
 {
   static _loadNames()
   {
-    console.log("wfrp4e | Loading Names...")
+    console.log("dh2e | Loading Names...")
 
     // Surname option 1
-    fetch("systems/wfrp4e/names/human_surnames.txt").then(r => r.text()).then(async nameText =>
+    fetch("systems/dh2e/names/human_surnames.txt").then(r => r.text()).then(async nameText =>
     {
       this.surnames = []
       nameText.split("\n").forEach((nameGroup) => this.surnames.push(nameGroup.split(",").map(function (item)
@@ -20,7 +20,7 @@ class NameGenWfrp
       })))
     })
     // Surname option 2 - prefix
-    fetch("systems/wfrp4e/names/human_surnames_prefix.txt").then(r => r.text()).then(async nameText =>
+    fetch("systems/dh2e/names/human_surnames_prefix.txt").then(r => r.text()).then(async nameText =>
     {
       this.surnamePrefixes = []
       nameText.split("\n").forEach((nameGroup) => this.surnamePrefixes.push(nameGroup.split(",").map(function (item)
@@ -30,7 +30,7 @@ class NameGenWfrp
     })
 
     // Surname option 2 - suffix
-    fetch("systems/wfrp4e/names/human_surnames_suffix.txt").then(r => r.text()).then(async nameText =>
+    fetch("systems/dh2e/names/human_surnames_suffix.txt").then(r => r.text()).then(async nameText =>
     {
       this.surnameSuffixes = []
       nameText.split("\n").forEach((nameGroup) => this.surnameSuffixes.push(nameGroup.split(",").map(function (item)
@@ -40,7 +40,7 @@ class NameGenWfrp
     })
 
     // Male forenames
-    fetch("systems/wfrp4e/names/male_human_forenames.txt").then(r => r.text()).then(async nameText =>
+    fetch("systems/dh2e/names/male_human_forenames.txt").then(r => r.text()).then(async nameText =>
     {
       this.human_male_Forenames = []
       nameText.split("\n").forEach((nameGroup) => this.human_male_Forenames.push(nameGroup.split(",").map(function (item)
@@ -50,7 +50,7 @@ class NameGenWfrp
     })
 
     // Female forenames
-    fetch("systems/wfrp4e/names/female_human_forenames.txt").then(r => r.text()).then(async nameText =>
+    fetch("systems/dh2e/names/female_human_forenames.txt").then(r => r.text()).then(async nameText =>
     {
       this.human_female_Forenames = []
       nameText.split("\n").forEach((nameGroup) => this.human_female_Forenames.push(nameGroup.split(",").map(function (item)
@@ -61,7 +61,7 @@ class NameGenWfrp
 
     // @@@@@@@@@@ DWARF @@@@@@@@@@@@@
     // male forenames
-    fetch("systems/wfrp4e/names/male_dwarf_forenames.txt").then(r => r.text()).then(async nameText =>
+    fetch("systems/dh2e/names/male_dwarf_forenames.txt").then(r => r.text()).then(async nameText =>
       {
         this.dwarf_male_Forenames = []
         nameText.split("\n").forEach((nameGroup) => this.dwarf_male_Forenames.push(nameGroup.split(",").map(function (item)
@@ -71,7 +71,7 @@ class NameGenWfrp
       })
 
     // Female forenames
-    fetch("systems/wfrp4e/names/female_dwarf_forenames.txt").then(r => r.text()).then(async nameText =>
+    fetch("systems/dh2e/names/female_dwarf_forenames.txt").then(r => r.text()).then(async nameText =>
       {
         this.dwarf_female_Forenames = []
         nameText.split("\n").forEach((nameGroup) => this.dwarf_female_Forenames.push(nameGroup.split(",").map(function (item)
@@ -82,7 +82,7 @@ class NameGenWfrp
 
     // @@@@@@@@@@ ELF @@@@@@@@@@@@@
         // elf forenames
-        fetch("systems/wfrp4e/names/elf_forenames.txt").then(r => r.text()).then(async nameText =>
+        fetch("systems/dh2e/names/elf_forenames.txt").then(r => r.text()).then(async nameText =>
           {
             this.elf_Forenames = []
             nameText.split("\n").forEach((nameGroup) => this.elf_Forenames.push(nameGroup.split(",").map(function (item)
@@ -91,7 +91,7 @@ class NameGenWfrp
             })))
           })
 
-          fetch("systems/wfrp4e/names/elf_surnames.txt").then(r => r.text()).then(async nameText =>
+          fetch("systems/dh2e/names/elf_surnames.txt").then(r => r.text()).then(async nameText =>
             {
               this.elf_surnames = []
               nameText.split("\n").forEach((nameGroup) => this.elf_surnames.push(nameGroup.split(",").map(function (item)
@@ -100,7 +100,7 @@ class NameGenWfrp
               })))
             })
         // elf start
-        fetch("systems/wfrp4e/names/elf_start.txt").then(r => r.text()).then(async nameText =>
+        fetch("systems/dh2e/names/elf_start.txt").then(r => r.text()).then(async nameText =>
           {
             this.elf_start = []
             nameText.split("\n").forEach((nameGroup) => this.elf_start.push(nameGroup.split(",").map(function (item)
@@ -108,9 +108,9 @@ class NameGenWfrp
               return item.trim()
             })))
           })
-      
+
       // elf connector
-      fetch("systems/wfrp4e/names/elf_connectors.txt").then(r => r.text()).then(async nameText =>
+      fetch("systems/dh2e/names/elf_connectors.txt").then(r => r.text()).then(async nameText =>
         {
           this.elf_connectors = []
           nameText.split("\n").forEach((nameGroup) => this.elf_connectors.push(nameGroup.split(",").map(function (item)
@@ -120,7 +120,7 @@ class NameGenWfrp
         })
 
               // female elf element
-      fetch("systems/wfrp4e/names/male_elf_element.txt").then(r => r.text()).then(async nameText =>
+      fetch("systems/dh2e/names/male_elf_element.txt").then(r => r.text()).then(async nameText =>
         {
           this.elf_male_element = []
           nameText.split("\n").forEach((nameGroup) => this.elf_male_element.push(nameGroup.split(",").map(function (item)
@@ -130,7 +130,7 @@ class NameGenWfrp
         })
 
               // male elf element
-      fetch("systems/wfrp4e/names/female_elf_element.txt").then(r => r.text()).then(async nameText =>
+      fetch("systems/dh2e/names/female_elf_element.txt").then(r => r.text()).then(async nameText =>
         {
           this.elf_female_element = []
           nameText.split("\n").forEach((nameGroup) => this.elf_female_element.push(nameGroup.split(",").map(function (item)
@@ -139,7 +139,7 @@ class NameGenWfrp
           })))
         })
         // wood elf end
-      fetch("systems/wfrp4e/names/elf_wood_end.txt").then(r => r.text()).then(async nameText =>
+      fetch("systems/dh2e/names/elf_wood_end.txt").then(r => r.text()).then(async nameText =>
         {
           this.elf_wood_end = []
           nameText.split("\n").forEach((nameGroup) => this.elf_wood_end.push(nameGroup.split(",").map(function (item)
@@ -148,7 +148,7 @@ class NameGenWfrp
           })))
         })
         // high elf end
-      fetch("systems/wfrp4e/names/elf_high_end.txt").then(r => r.text()).then(async nameText =>
+      fetch("systems/dh2e/names/elf_high_end.txt").then(r => r.text()).then(async nameText =>
         {
           this.elf_high_end = []
           nameText.split("\n").forEach((nameGroup) => this.elf_high_end.push(nameGroup.split(",").map(function (item)
@@ -159,7 +159,7 @@ class NameGenWfrp
 
     // @@@@@@@@@@ Halfling @@@@@@@@@@@@@
     // Halfling start
-    fetch("systems/wfrp4e/names/halfling_start.txt").then(r => r.text()).then(async nameText =>
+    fetch("systems/dh2e/names/halfling_start.txt").then(r => r.text()).then(async nameText =>
       {
         this.halfling_start = []
         nameText.split("\n").forEach((nameGroup) => this.halfling_start.push(nameGroup.split(",").map(function (item)
@@ -169,7 +169,7 @@ class NameGenWfrp
       })
 
     // Male ending
-    fetch("systems/wfrp4e/names/male_halfling_element.txt").then(r => r.text()).then(async nameText =>
+    fetch("systems/dh2e/names/male_halfling_element.txt").then(r => r.text()).then(async nameText =>
       {
         this.male_halfling_element = []
         nameText.split("\n").forEach((nameGroup) => this.male_halfling_element.push(nameGroup.split(",").map(function (item)
@@ -178,7 +178,7 @@ class NameGenWfrp
         })))
       })
           // Female ending
-    fetch("systems/wfrp4e/names/female_halfling_element.txt").then(r => r.text()).then(async nameText =>
+    fetch("systems/dh2e/names/female_halfling_element.txt").then(r => r.text()).then(async nameText =>
       {
         this.female_halfling_element = []
         nameText.split("\n").forEach((nameGroup) => this.female_halfling_element.push(nameGroup.split(",").map(function (item)
@@ -187,7 +187,7 @@ class NameGenWfrp
         })))
       })
       // Halfling surnames
-      fetch("systems/wfrp4e/names/halfling_surnames.txt").then(r => r.text()).then(async nameText =>
+      fetch("systems/dh2e/names/halfling_surnames.txt").then(r => r.text()).then(async nameText =>
         {
           this.halfling_surnames = []
           nameText.split("\n").forEach((nameGroup) => this.halfling_surnames.push(nameGroup.split(",").map(function (item)
@@ -196,7 +196,7 @@ class NameGenWfrp
           })))
         })
         // Halfling nicknames
-        fetch("systems/wfrp4e/names/halfling_nicknames.txt").then(r => r.text()).then(async nameText =>
+        fetch("systems/dh2e/names/halfling_nicknames.txt").then(r => r.text()).then(async nameText =>
           {
             this.halfling_nicknames = []
             nameText.split("\n").forEach((nameGroup) => this.halfling_nicknames.push(nameGroup.split(",").map(function (item)
@@ -207,7 +207,7 @@ class NameGenWfrp
     }
   /**
    * Generate a Forename + Surname
-   * 
+   *
    * @param {Object} options species, gender
    */
   static generateName(options = {species: "human"})
@@ -228,7 +228,7 @@ class NameGenWfrp
 
   /**
    * Generate a forename
-   * 
+   *
    * @param {Object} options species, gender
    */
   static generateForename({species,gender})
@@ -261,7 +261,7 @@ class NameGenWfrp
         let roll = new Roll(`1d${size}-1`).roll().total
         return names[roll][0];
       }
-      else 
+      else
       {
         /**
          * 110
@@ -290,7 +290,7 @@ class NameGenWfrp
 
 
         let start = this.RollArray("elf_start");
-        
+
         let connector = useConnector ?  this.RollArray("elf_connectors") : ""
         let element = useElement ? this.RollArray(`elf_${gender}_element`) : ""
 
@@ -309,10 +309,10 @@ class NameGenWfrp
 
   /**
    * Generate a Surname - use one of two options
-   * 
+   *
    * Option 1. Choose and evaluate from a list of surnames
    * Option 2. Choose and evaluate from a list of prefixes and suffixes for surnames
-   * 
+   *
    * @param {Object} options species, gender
    */
   static generateSurname(options = {species: "human", gender : "male"})
@@ -342,7 +342,7 @@ class NameGenWfrp
 
         return this.evaluateNamePartial(prefixChoice) + this.evaluateNamePartial(suffixChoice)
       }
-    } 
+    }
     else if (options.species == "dwarf")
     {
       let base = this.generateForename({species: options.species, gender:  options.gender})
@@ -351,7 +351,7 @@ class NameGenWfrp
       {
         suffix = (new Roll("1d2").roll().total == 1 ? "snev" : "sson")
       }
-      else 
+      else
       {
         suffix = (new Roll("1d2").roll().total == 1 ? "sniz" : "sdottir")
       }
@@ -369,9 +369,9 @@ class NameGenWfrp
 
   /**
    * Parses down a name the partials given.
-   * 
+   *
    * Name partial example: "Bar(f)sheim(er)" - randomly decide what to include within parentheses.
-   * 
+   *
    * @param {String} namePartial A name partial is the inner choices
    */
   static evaluateNamePartial(namePartial)
@@ -394,9 +394,9 @@ class NameGenWfrp
 
   /**
    * A name is typically followed by choices of suffixes to use, separated by a comma.
-   * 
+   *
    * Example of choices - "Aver, -land(er), -lund(er)" - Aver is not a choice, the other two are choices, however at least one of them is required.
-   * 
+   *
    * @param {String} choiceString String of name chocies
    */
   static evaluateChoices(choiceString)

@@ -3,7 +3,7 @@
  *
  * ActorSheetWfrp4eCharacter are assigned to character type actors, and the specific interactions
  * character type actors need are defined here, specifically for careers and spending exp.
- * 
+ *
  */
 class ActorSheetWfrp4eCharacter extends ActorSheetWfrp4e
 {
@@ -26,8 +26,8 @@ class ActorSheetWfrp4eCharacter extends ActorSheetWfrp4e
    */
   get template()
   {
-    if (!game.user.isGM && this.actor.limited) return "systems/wfrp4e/templates/actors/actor-limited.html";
-    return "systems/wfrp4e/templates/actors/actor-sheet.html";
+    if (!game.user.isGM && this.actor.limited) return "systems/dh2e/templates/actors/actor-limited.html";
+    return "systems/dh2e/templates/actors/actor-sheet.html";
 
   }
 
@@ -37,7 +37,7 @@ class ActorSheetWfrp4eCharacter extends ActorSheetWfrp4e
   /* --------------------------------------------------------------------------------------------------------- */
   /**
    * This list of event handlers is focused on character interactions, such has spending exp and handling careers.
-   * 
+   *
    *
   /* --------------------------------------------------------------------------------------------------------- */
 
@@ -285,12 +285,12 @@ class ActorSheetWfrp4eCharacter extends ActorSheetWfrp4e
                 no:
                 {
                   label: "No",
-                  callback : dlg => 
+                  callback : dlg =>
                   {
-                    this.actor.deleteEmbeddedEntity("OwnedItem", itemId)                  
+                    this.actor.deleteEmbeddedEntity("OwnedItem", itemId)
                   },
                 },
-                cancel: 
+                cancel:
                 {
                   label: "Cancel",
                   callback: dlg =>{ return }
@@ -343,7 +343,7 @@ class ActorSheetWfrp4eCharacter extends ActorSheetWfrp4e
 }
 
 // Register Character Sheet
-Actors.registerSheet("wfrp4e", ActorSheetWfrp4eCharacter,
+Actors.registerSheet("dh2e", ActorSheetWfrp4eCharacter,
 {
   types: ["character"],
   makeDefault: true

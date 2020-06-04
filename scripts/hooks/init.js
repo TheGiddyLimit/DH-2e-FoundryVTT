@@ -3,8 +3,8 @@
  */
 Hooks.once("init", () => {
     // load tables from system folder
-    FilePicker.browse("data", "systems/wfrp4e/tables").then(resp => {
-      try 
+    FilePicker.browse("data", "systems/dh2e/tables").then(resp => {
+      try
       {
       if (resp.error)
         throw ""
@@ -75,7 +75,7 @@ Hooks.once("init", () => {
         },
       ]
     }
-  
+
     // Create Winds table
     WFRP_Tables.winds = {
       name : "The Swirling Winds",
@@ -104,8 +104,8 @@ Hooks.once("init", () => {
       ]
     }
 
-  
-    game.settings.register("wfrp4e", "systemMigrationVersion", {
+
+    game.settings.register("dh2e", "systemMigrationVersion", {
       name: "System Migration Version",
       scope: "world",
       config: false,
@@ -114,7 +114,7 @@ Hooks.once("init", () => {
     });
 
     // Register initiative rule
-    game.settings.register("wfrp4e", "initiativeRule", {
+    game.settings.register("dh2e", "initiativeRule", {
       name: "SETTINGS.InitRule",
       hint: "SETTINGS.InitHint",
       scope: "world",
@@ -129,9 +129,9 @@ Hooks.once("init", () => {
       },
       onChange: rule => _setWfrp4eInitiative(rule)
     });
-    _setWfrp4eInitiative(game.settings.get("wfrp4e", "initiativeRule"));
-  
-  
+    _setWfrp4eInitiative(game.settings.get("dh2e", "initiativeRule"));
+
+
     function _setWfrp4eInitiative(initMethod)
     {
       let formula;
@@ -140,30 +140,30 @@ Hooks.once("init", () => {
         case "default":
         formula = "@characteristics.i.value + @characteristics.ag.value/100";
         break;
-  
+
         case "sl":
         formula = "(floor(@characteristics.i.value / 10) - floor(1d100/10))"
         break;
-  
+
         case "d10Init":
         formula = "1d10 + @characteristics.i.value"
         break;
-  
+
         case "d10InitAgi":
         formula = "1d10 + @characteristics.i.bonus + @characteristics.ag.bonus"
         break;
       }
-  
+
       let decimals = (initMethod == "default") ? 2 : 0;
       CONFIG.Combat.initiative = {
         formula: formula,
         decimals: decimals
       }
     }
-  
-  
+
+
      // Register Advantage cap
-     game.settings.register("wfrp4e", "capAdvantageIB", {
+     game.settings.register("dh2e", "capAdvantageIB", {
        name: "SETTINGS.CapAdvIB",
        hint: "SETTINGS.CapAdvIBHint",
        scope: "world",
@@ -171,9 +171,9 @@ Hooks.once("init", () => {
        default: false,
        type: Boolean
      });
-  
+
     // Register Fast SL rule
-    game.settings.register("wfrp4e", "fastSL", {
+    game.settings.register("dh2e", "fastSL", {
       name: "SETTINGS.FastSL",
       hint: "SETTINGS.FastSLHint",
       scope: "world",
@@ -181,9 +181,9 @@ Hooks.once("init", () => {
       default: false,
       type: Boolean
     });
-  
+
     // Register Tests above 100% Rule
-    game.settings.register("wfrp4e", "testAbove100", {
+    game.settings.register("dh2e", "testAbove100", {
       name: "SETTINGS.TestsAbove100",
       hint: "SETTINGS.TestsAbove100Hint",
       scope: "world",
@@ -193,7 +193,7 @@ Hooks.once("init", () => {
     });
 
     // Register Criticals/Fumbles on all tests
-    game.settings.register("wfrp4e", "criticalsFumblesOnAllTests", {
+    game.settings.register("dh2e", "criticalsFumblesOnAllTests", {
       name: "SETTINGS.CriticalsFumblesAllTests",
       hint: "SETTINGS.CriticalsFumblesAllTestsHint",
       scope: "world",
@@ -201,10 +201,10 @@ Hooks.once("init", () => {
       default: false,
       type: Boolean
     });
-  
-  
+
+
       // Register Extended Tests
-      game.settings.register("wfrp4e", "extendedTests", {
+      game.settings.register("dh2e", "extendedTests", {
         name: "SETTINGS.ExtendedTests",
         hint: "SETTINGS.ExtendedTestsHint",
         scope: "world",
@@ -212,9 +212,9 @@ Hooks.once("init", () => {
         default: false,
         type: Boolean
       });
-  
+
       // Register Test auto-fill
-      game.settings.register("wfrp4e", "testAutoFill", {
+      game.settings.register("dh2e", "testAutoFill", {
         name: "SETTINGS.TestDialogAutoPopulate",
         hint: "SETTINGS.TestDialogAutoPopulateHint",
         scope: "world",
@@ -223,9 +223,9 @@ Hooks.once("init", () => {
         type: Boolean
       });
 
-        
+
       // Register Test auto-fill
-      game.settings.register("wfrp4e", "autoFillAdvantage", {
+      game.settings.register("dh2e", "autoFillAdvantage", {
         name: "SETTINGS.AutoFillAdv",
         hint: "SETTINGS.AutoFillAdvHint",
         scope: "world",
@@ -235,7 +235,7 @@ Hooks.once("init", () => {
       });
 
       // Register default test difficulty
-      game.settings.register("wfrp4e", "testDefaultDifficulty", {
+      game.settings.register("dh2e", "testDefaultDifficulty", {
         name: "SETTINGS.TestDialogDefaultDifficulty",
         hint: "SETTINGS.TestDialogDefaultDifficultyHint",
         scope: "world",
@@ -243,9 +243,9 @@ Hooks.once("init", () => {
         default: false,
         type: Boolean
       });
-  
+
       // Register NPC Species Randomization
-      game.settings.register("wfrp4e", "npcSpeciesCharacteristics", {
+      game.settings.register("dh2e", "npcSpeciesCharacteristics", {
         name: "SETTINGS.NpcAverageChar",
         hint: "SETTINGS.NpcAverageCharHint",
         scope: "world",
@@ -253,9 +253,9 @@ Hooks.once("init", () => {
         default: true,
         type: Boolean
       });
-  
+
       // Register Partial Channelling
-      game.settings.register("wfrp4e", "partialChannelling", {
+      game.settings.register("dh2e", "partialChannelling", {
         name: "SETTINGS.PartialChannelling",
         hint: "SETTINGS.PartialChannellingHint",
         scope: "world",
@@ -265,7 +265,7 @@ Hooks.once("init", () => {
       });
 
       // Register Round Summary
-      game.settings.register("wfrp4e", "displayRoundSummary", {
+      game.settings.register("dh2e", "displayRoundSummary", {
         name: "SETTINGS.RoundSummary",
         hint: "SETTINGS.RoundSummaryHint",
         scope: "world",
@@ -273,20 +273,20 @@ Hooks.once("init", () => {
         default: true,
         type: Boolean
       });
-  
+
       // Register Status on Turn Start
-      game.settings.register("wfrp4e", "statusOnTurnStart", {
+      game.settings.register("dh2e", "statusOnTurnStart", {
         name: "SETTINGS.StatusTurnStart",
         hint: "SETTINGS.StatusTurnStartHint",
         scope: "world",
         config: true,
         default: true,
         type: Boolean
-      });       
-  
-  
+      });
+
+
       // Register Focus on Turn Start
-      game.settings.register("wfrp4e", "focusOnTurnStart", {
+      game.settings.register("dh2e", "focusOnTurnStart", {
         name: "SETTINGS.FocusTurnStart",
         hint: "SETTINGS.FocusTurnStartHint",
         scope: "world",
@@ -294,9 +294,9 @@ Hooks.once("init", () => {
         default: true,
         type: Boolean
       });
-  
+
       // Register Hiding Test Data
-      game.settings.register("wfrp4e", "hideTestData", {
+      game.settings.register("dh2e", "hideTestData", {
         name: "SETTINGS.HideTestData",
         hint: "SETTINGS.HideTestDataHint",
         scope: "world",
@@ -306,7 +306,7 @@ Hooks.once("init", () => {
       });
 
       // Register Manual Chat Cards
-      game.settings.register("wfrp4e", "manualChatCards", {
+      game.settings.register("dh2e", "manualChatCards", {
         name: "SETTINGS.ManualChatCards",
         hint: "SETTINGS.ManualChatCardsHint",
         scope: "client",
@@ -315,7 +315,7 @@ Hooks.once("init", () => {
         type: Boolean
       });
 
-      game.settings.register("wfrp4e", "playerBrowser", {
+      game.settings.register("dh2e", "playerBrowser", {
         name: "SETTINGS.PlayerBrowser",
         hint: "SETTINGS.PlayerBrowserHint",
         scope: "world",
@@ -325,7 +325,7 @@ Hooks.once("init", () => {
       });
 
       // Register Advantage cap
-      game.settings.register("wfrp4e", "soundEffects", {
+      game.settings.register("dh2e", "soundEffects", {
         name: "SETTINGS.SoundEffects",
         hint: "SETTINGS.SoundEffectsHint",
         scope: "world",
@@ -334,7 +334,7 @@ Hooks.once("init", () => {
         type: Boolean
       });
 
-      game.settings.register("wfrp4e", "customCursor", {
+      game.settings.register("dh2e", "customCursor", {
         name: "SETTINGS.CustomCursor",
         hint: "SETTINGS.CustomCursorHint",
         scope: "world",
@@ -342,8 +342,8 @@ Hooks.once("init", () => {
         default: true,
         type: Boolean
       });
-   
-      game.settings.register("wfrp4e", "dangerousCrits", {
+
+      game.settings.register("dh2e", "dangerousCrits", {
         name: "SETTINGS.DangerousCrits",
         hint: "SETTINGS.DangerousCritsHint",
         scope: "world",
@@ -352,7 +352,7 @@ Hooks.once("init", () => {
         type: Boolean
       });
 
-      game.settings.register("wfrp4e", "dangerousCritsMod", {
+      game.settings.register("dh2e", "dangerousCritsMod", {
         name: "SETTINGS.DangerousCritsMod",
         hint: "SETTINGS.DangerousCritsModHint",
         scope: "world",
@@ -360,31 +360,31 @@ Hooks.once("init", () => {
         default: 10,
         type: Number
       });
-  
+
     // Pre-load templates
     loadTemplates([
-      "systems/wfrp4e/templates/actors/actor-attributes.html",
-      "systems/wfrp4e/templates/actors/actor-abilities.html",
-      "systems/wfrp4e/templates/actors/actor-main.html",
-      "systems/wfrp4e/templates/actors/actor-combat.html",
-      "systems/wfrp4e/templates/actors/actor-biography.html",
-      "systems/wfrp4e/templates/actors/actor-inventory.html",
-      "systems/wfrp4e/templates/actors/actor-skills.html",
-      "systems/wfrp4e/templates/actors/actor-magic.html",
-      "systems/wfrp4e/templates/actors/actor-religion.html",
-      "systems/wfrp4e/templates/actors/actor-talents.html",
-      "systems/wfrp4e/templates/actors/actor-classes.html",
-      "systems/wfrp4e/templates/actors/actor-notes.html",
-      "systems/wfrp4e/templates/actors/npc-main.html",
-      "systems/wfrp4e/templates/actors/npc-notes.html",
-      "systems/wfrp4e/templates/actors/creature-main.html",
-      "systems/wfrp4e/templates/actors/creature-notes.html",
-      "systems/wfrp4e/templates/actors/creature-main.html",
-      "systems/wfrp4e/templates/chat/dialog-constant.html",
-      "systems/wfrp4e/templates/chat/test-card.html",
-      "systems/wfrp4e/templates/chat/chat-command-display-info.html",
-      "systems/wfrp4e/templates/items/item-header.html",
-      "systems/wfrp4e/templates/items/item-description.html",
+      "systems/dh2e/templates/actors/actor-attributes.html",
+      "systems/dh2e/templates/actors/actor-abilities.html",
+      "systems/dh2e/templates/actors/actor-main.html",
+      "systems/dh2e/templates/actors/actor-combat.html",
+      "systems/dh2e/templates/actors/actor-biography.html",
+      "systems/dh2e/templates/actors/actor-inventory.html",
+      "systems/dh2e/templates/actors/actor-skills.html",
+      "systems/dh2e/templates/actors/actor-magic.html",
+      "systems/dh2e/templates/actors/actor-religion.html",
+      "systems/dh2e/templates/actors/actor-talents.html",
+      "systems/dh2e/templates/actors/actor-classes.html",
+      "systems/dh2e/templates/actors/actor-notes.html",
+      "systems/dh2e/templates/actors/npc-main.html",
+      "systems/dh2e/templates/actors/npc-notes.html",
+      "systems/dh2e/templates/actors/creature-main.html",
+      "systems/dh2e/templates/actors/creature-notes.html",
+      "systems/dh2e/templates/actors/creature-main.html",
+      "systems/dh2e/templates/chat/dialog-constant.html",
+      "systems/dh2e/templates/chat/test-card.html",
+      "systems/dh2e/templates/chat/chat-command-display-info.html",
+      "systems/dh2e/templates/items/item-header.html",
+      "systems/dh2e/templates/items/item-description.html",
     ]);
 
     // Load name construction from files

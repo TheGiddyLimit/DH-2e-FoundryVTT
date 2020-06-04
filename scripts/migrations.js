@@ -1,6 +1,6 @@
 class Migration
 {
- 
+
   static async migrateWorld()
   {
     ui.notifications.notify("Beginning Migration to WFRP4E 1.0")
@@ -38,7 +38,7 @@ class Migration
     }
     ui.notifications.notify("Migration to WFRP4E 1.0 Finished")
 
-    game.settings.set("wfrp4e", "systemMigrationVersion", game.system.data.version)
+    game.settings.set("dh2e", "systemMigrationVersion", game.system.data.version)
 
   }
 
@@ -56,7 +56,7 @@ class Migration
   {
     if (itemData.type == "weapon")
       return this.migrateWeaponData(itemData)
-    else 
+    else
       return itemData;
   }
 
@@ -65,7 +65,7 @@ class Migration
     if (!weaponData.data.damage.value)
     {
       let isMelee = WFRP4E.groupToType[weaponData.data.weaponGroup.value] == "melee"
-      
+
       if (isMelee)
         weaponData.data.damage.value = weaponData.data.damage.meleeValue;
       else

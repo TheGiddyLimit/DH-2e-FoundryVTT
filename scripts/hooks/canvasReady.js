@@ -2,7 +2,7 @@ Hooks.on("canvasReady", (canvas) => {
 
   if (!(game.modules.get("fxmaster") && game.modules.get("fxmaster").active))
   {
-    morrsliebActive = canvas.scene.getFlag("wfrp4e", "morrslieb")
+    morrsliebActive = canvas.scene.getFlag("dh2e", "morrslieb")
     if (morrsliebActive)
     {
       canvas.background.filters.push(CONFIG.Morrslieb)

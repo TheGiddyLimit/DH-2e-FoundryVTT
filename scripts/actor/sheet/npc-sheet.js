@@ -5,7 +5,7 @@
  * npc type actors need are defined here, specifically for careers. NPCs have the unique
  * functionality with careers where clicking "complete" automatically advances characteristics,
  * skills, and talents from that career.
- * 
+ *
  */
 class ActorSheetWfrp4eNPC extends ActorSheetWfrp4e
 {
@@ -27,8 +27,8 @@ class ActorSheetWfrp4eNPC extends ActorSheetWfrp4e
    */
   get template()
   {
-    if (!game.user.isGM && this.actor.limited) return "systems/wfrp4e/templates/actors/actor-limited.html";
-    return "systems/wfrp4e/templates/actors/npc-sheet.html";
+    if (!game.user.isGM && this.actor.limited) return "systems/dh2e/templates/actors/actor-limited.html";
+    return "systems/dh2e/templates/actors/npc-sheet.html";
   }
 
   /* -------------------------------------------- */
@@ -75,7 +75,7 @@ class ActorSheetWfrp4eNPC extends ActorSheetWfrp4e
 }
 
 // Register NPC Sheet
-Actors.registerSheet("wfrp4e", ActorSheetWfrp4eNPC,
+Actors.registerSheet("dh2e", ActorSheetWfrp4eNPC,
 {
   types: ["npc"],
   makeDefault: true

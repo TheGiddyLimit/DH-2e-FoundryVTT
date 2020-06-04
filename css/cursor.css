@@ -3,19 +3,19 @@
 }
 
 body {
-  cursor:url(../ui/cursors/normal.png), default; 
+  cursor:url(../ui/cursors/normal.png), default;
 }
 
 a{
-  cursor:url(../ui/cursors/pointer.png), pointer; 
+  cursor:url(../ui/cursors/pointer.png), pointer;
 }
 
 .draggable{
-  cursor:url(../ui/cursors/drag.png), move; 
+  cursor:url(../ui/cursors/drag.png), move;
 }
 
 #hotbar .macro{
-  cursor:url(../ui/cursors/pointer.png), pointer; 
+  cursor:url(../ui/cursors/pointer.png), pointer;
 }
 
 #playlists-popout .global-volume::-webkit-slider-thumb,
@@ -24,7 +24,7 @@ a{
 }
 #playlists-popout li.playlist:not(:first-of-type) li.sound .sound-volume::-webkit-slider-thumb,
       #sidebar #playlists li.playlist:not(:first-of-type) li.sound .sound-volume::-webkit-slider-thumb {
-        cursor:url(../ui/cursors/pointer.png), pointer; 
+        cursor:url(../ui/cursors/pointer.png), pointer;
     }
 
 #sidebar #settings button {
@@ -44,24 +44,24 @@ a{
 }
 
 #navigation #scene-list .scene.view, #navigation #scene-list .scene.context {
-    cursor:url(../ui/cursors/normal.png), default; 
+    cursor:url(../ui/cursors/normal.png), default;
 }
 
 #navigation #nav-toggle {
-    cursor:url(../ui/cursors/normal.png), default; 
+    cursor:url(../ui/cursors/normal.png), default;
 }
 
 #navigation #scene-list .scene.nav-item {
-    cursor:url(../ui/cursors/normal.png), default; 
+    cursor:url(../ui/cursors/normal.png), default;
 }
 
 #controls .scene-control.active, #controls .control-tool.active, #controls .scene-control:hover, #controls .control-tool:hover {
-    cursor:url(../ui/cursors/normal.png), default; 
+    cursor:url(../ui/cursors/normal.png), default;
 }
 
 #controls .scene-control, #controls .control-tool {
-    cursor:url(../ui/cursors/pointer.png), pointer !important; 
-    cursor:url(../ui/cursors/normal.png), default !important; 
+    cursor:url(../ui/cursors/pointer.png), pointer !important;
+    cursor:url(../ui/cursors/normal.png), default !important;
 }
 
 .app.window-app .form-group input[type="range"]::-webkit-slider-thumb {
@@ -95,7 +95,7 @@ a{
 .app.window-app .form-group label,
 #sidebar .sidebar-tab #chat-controls div.roll-type-select select,
 #sidebar .sidebar-tab #chat-controls div.roll-type-select i.fas {
-    cursor:url(../ui/cursors/normal.png), default; 
+    cursor:url(../ui/cursors/normal.png), default;
 }
 
 #client-settings section.content .submenu > button,

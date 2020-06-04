@@ -14,16 +14,16 @@ Hooks.on("ready", async () => {
         }
       }
     }
-  
+
     let activeModules = game.settings.get("core", "moduleConfiguration");
-   
+
     // Load module tables if the module is active and if the module has tables
      for (let m in activeModules)
      {
        let module;
        if (activeModules[m])
        {
-        
+
           try{
           await FilePicker.browse("data", `modules/${m}/tables`).then(resp => {
 
@@ -35,7 +35,7 @@ Hooks.on("ready", async () => {
                if (!file.includes(".json"))
                  continue
                let filename = file.substring(file.lastIndexOf("/")+1, file.indexOf(".json"));
-   
+
                fetch(file).then(r=>r.json()).then(async records => {
                 // If extension of a table, add it to the columns
                 if(records.extend && WFRP_Tables[filename])
@@ -63,7 +63,7 @@ Hooks.on("ready", async () => {
 
      // Load tables from world if it has a tables folder
      await FilePicker.browse("data", `worlds/${game.world.name}/tables`).then(resp => {
-      try 
+      try
       {
       if (resp.error || !resp.target.includes("tables"))
         throw ""
@@ -96,17 +96,17 @@ Hooks.on("ready", async () => {
     catch
     {
       // Do nothing
-    }   
+    }
   })
 
   // ***** Change cursor styles if the setting is enabled *****
 
-  if(game.settings.get('wfrp4e', 'customCursor')){
-    console.log('wfrp4e | Using custom cursor')
+  if(game.settings.get('dh2e', 'customCursor')){
+    console.log('dh2e | Using custom cursor')
     let link = document.createElement('link');
     link.setAttribute('rel', 'stylesheet')
     link.type = 'text/css'
-    link.href = '/systems/wfrp4e/css/cursor.css'
+    link.href = '/systems/dh2e/css/cursor.css'
 
     document.head.appendChild(link);
   }
@@ -176,7 +176,7 @@ Hooks.on("ready", async () => {
 Combat.prototype._getInitiativeFormula = function(combatant) {
   const actor = combatant.actor;
   let initiativeFormula = CONFIG.Combat.initiative.formula || game.system.data.initiative;
-  let initiativeSetting = game.settings.get("wfrp4e", "initiativeRule")
+  let initiativeSetting = game.settings.get("dh2e", "initiativeRule")
 
   if ( !actor ) return initiativeFormula;
   let combatReflexes = 0;
@@ -213,7 +213,7 @@ Combat.prototype._getInitiativeFormula = function(combatant) {
 
 
 // Socket Responses - Morrslieb and opposed tests
- game.socket.on("system.wfrp4e", data => {
+ game.socket.on("system.dh2e", data => {
    if (data.type == "morrslieb")
     canvas.draw();
 
@@ -238,15 +238,15 @@ Combat.prototype._getInitiativeFormula = function(combatant) {
 
  const NEEDS_MIGRATION_VERSION = 1.0;
  let needMigration
- try 
+ try
  {
-  needMigration = game.settings.get("wfrp4e", "systemMigrationVersion") < NEEDS_MIGRATION_VERSION;
+  needMigration = game.settings.get("dh2e", "systemMigrationVersion") < NEEDS_MIGRATION_VERSION;
  }
- catch 
+ catch
  {
   needMigration = true;
  }
- if (needMigration && game.user.isGM ) 
+ if (needMigration && game.user.isGM )
  {
   new Dialog({
     title: "Migration",
@@ -276,4 +276,3 @@ Hooks.on("closePermissionConfig", () => {
   }
 })
 
-   

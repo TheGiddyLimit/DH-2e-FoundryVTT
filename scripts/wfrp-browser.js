@@ -2,7 +2,7 @@
  *  offers functionality to filter through them to search easily. By default, you can filter
  *  through the name and description, as well as item type. If an item type is selected, more
  *  filters are shown that only apply to those types (mostly). If you select Weapon - you can
- *  then select which weapon group, reach, etc. 
+ *  then select which weapon group, reach, etc.
 */
 class BrowserWfrp4e extends Application
 {
@@ -36,7 +36,7 @@ class BrowserWfrp4e extends Application
         description: "",
         worldItems : true,
       },
-      // Various type specific filters that are shown based on type selected. 
+      // Various type specific filters that are shown based on type selected.
       dynamic : {
         careergroup : {value : "", exactMatch : true, type : ["career"], show : false},
         class : {value : "", type : ["career"], show : false},
@@ -100,7 +100,7 @@ class BrowserWfrp4e extends Application
   {
     const options = super.defaultOptions;
     options.id = "wfrp4e-browser";
-    options.template = "systems/wfrp4e/templates/browser/browser.html"
+    options.template = "systems/dh2e/templates/browser/browser.html"
     options.classes.push("wfrp4e", "wfrp-browser");
     options.resizable = true;
     options.height = 900;
@@ -193,10 +193,10 @@ class BrowserWfrp4e extends Application
 
   /**
    * addItems is used when loading items upon startup, it looks at each item
-   * and determines if some values need to be recorded. For instance, we want 
-   * to know all the career groups of all the careers being loaded, or all the 
+   * and determines if some values need to be recorded. For instance, we want
+   * to know all the career groups of all the careers being loaded, or all the
    * lores of spells. This data is then made available to the user to filter by.
-   * 
+   *
    * @param {Array} itemList List of items to be added
    */
   addItems(itemList)
@@ -242,10 +242,10 @@ class BrowserWfrp4e extends Application
    * applyFilter is called each time the filter changes to correctly hide or show
    * different items based on the filter. The most complicated part is the dynamic filters
    * which is a giant case statement for each filter type. Each dynamic filter applied
-   * will filter out the items that don't meant the criteria, but does not filter 
+   * will filter out the items that don't meant the criteria, but does not filter
    * out items where the filter does not apply. i.e. changing damage does not affect
    * careers if you have both weapons and careers showing.
-   * 
+   *
    * @param {Object} html html of the item list
    */
   applyFilter(html)
@@ -399,7 +399,7 @@ class BrowserWfrp4e extends Application
     // if the item should be shown or not.
     this.filterIds = filteredItems.map(i => i.filterId);
     let list = html.find(".browser-item")
-    for (let element of list) 
+    for (let element of list)
     {
       if (this.filterIds.includes(Number(element.getAttribute('data-filter-id'))))
         $(element).show();
@@ -441,7 +441,7 @@ class BrowserWfrp4e extends Application
       title : "Import Results",
       content : `<p>Are you sure you want to import your query result?<br>(${filteredItems.length} items)`,
       buttons : {
-        yes: 
+        yes:
         {
           label: "Yes",
           callback: async html => {
@@ -449,7 +449,7 @@ class BrowserWfrp4e extends Application
               await Item.create(i.data, {renderSheet : false});
           }
         },
-        cancel: 
+        cancel:
         {
           label: "Cancel",
           callback: html => {return}
@@ -560,7 +560,7 @@ class BrowserWfrp4e extends Application
 }
 
 Hooks.on("renderCompendiumDirectory", (app, html, data) => {
-  if (game.user.isGM || game.settings.get("wfrp4e", "playerBrowser"))
+  if (game.user.isGM || game.settings.get("dh2e", "playerBrowser"))
   {
     const button = $(`<button class="browser-btn">Browser</button>`);
     html.find(".directory-footer").append(button);

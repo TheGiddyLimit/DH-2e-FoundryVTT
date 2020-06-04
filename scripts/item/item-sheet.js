@@ -57,17 +57,17 @@ class ItemSheetWfrp4e extends ItemSheet
   get template()
   {
     let type = this.item.type;
-    return `systems/wfrp4e/templates/items/item-${type}-sheet.html`;
+    return `systems/dh2e/templates/items/item-${type}-sheet.html`;
   }
 
   /* -------------------------------------------- */
 
   /**
    * Prepare item sheet data.
-   * 
+   *
    * Start with the base item data and extending with additional properties for rendering.
    * Each item type has specific data (typically from config constants) that needs to be rendered
-   * 
+   *
    * Example: A weapon sheet needs all different weapon types to list in the weaponGroup dropdown (`data['weaponGroups'] = WFRP4E.weaponGroups;`)
    */
   getData()
@@ -172,7 +172,7 @@ class ItemSheetWfrp4e extends ItemSheet
       data['mutationTypes'] = WFRP4E.mutationTypes;
     }
 
-    data.showBorder = data.item.img == "systems/wfrp4e/icons/blank.png" || !data.item.img
+    data.showBorder = data.item.img == "systems/dh2e/icons/blank.png" || !data.item.img
     data.isGM = game.user.isGM;
     data.isOwned = this.item.isOwned;
     return data;
@@ -212,7 +212,7 @@ class ItemSheetWfrp4e extends ItemSheet
       }),
 
 
-      // For a career, when characteristic checkbox is changed, ensure list of 
+      // For a career, when characteristic checkbox is changed, ensure list of
       // characteristics for that career remains valid.
       html.find('.char-checkbox').click(async event =>
       {
@@ -308,7 +308,7 @@ class ItemSheetWfrp4e extends ItemSheet
       // If no change
       if (ev.target.value == this.item.name)
         return
-      
+
       let currentCareer = duplicate(this.item.actor.data.items.filter(i => i.type == "career").find(i => i.data.current.value));
 
       // If career has the skill that was changed, change the name in the career
@@ -316,7 +316,7 @@ class ItemSheetWfrp4e extends ItemSheet
         currentCareer.data.skills[currentCareer.data.skills.indexOf(this.item.name)] = ev.target.value;
       else // if it doesn't, return
         return;
-      
+
       let oldName = this.item.name
 
       // Ask the user to confirm the change

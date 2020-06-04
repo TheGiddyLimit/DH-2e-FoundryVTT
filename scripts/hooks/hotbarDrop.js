@@ -4,7 +4,7 @@
  * Actor     - open actor sheet
  * Journal   - open journal sheet
  */
-Hooks.on("hotbarDrop", async (bar, data, slot) => 
+Hooks.on("hotbarDrop", async (bar, data, slot) =>
 {
   // Create item macro if rollable item - weapon, spell, prayer, trait, or skill
   if (data.type == "Item")
@@ -53,7 +53,7 @@ Hooks.on("hotbarDrop", async (bar, data, slot) =>
       macro = await Macro.create({
       name: journal.data.name,
       type : "script",
-      img: "systems/wfrp4e/icons/buildings/scroll.png",
+      img: "systems/dh2e/icons/buildings/scroll.png",
       command : command
       }, {displaySheet: false})
       game.user.assignHotbarMacro(macro, slot);

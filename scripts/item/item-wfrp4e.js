@@ -1,11 +1,11 @@
 /**
  * The ItemWfrp4e class only provides two core functionalities
- * 
+ *
  * 1. Expansion data - what data is shown for the dropdown expansions
  * 2. Chat data - what data is in the chat card when the item is posted
- * 
+ *
  * Expansion and chat data is defined for each different item type
- * 
+ *
  */
 
 class ItemWfrp4e extends Item
@@ -14,18 +14,18 @@ class ItemWfrp4e extends Item
   static async create(data, options)
   {
     if (!data.img)
-      data.img = "systems/wfrp4e/icons/blank.png";
+      data.img = "systems/dh2e/icons/blank.png";
     super.create(data, options);
   }
 
   /******* ITEM EXPAND DATA ***********
-   * Expansion data is called when an item's dropdown is created. Each function organizes a 'properties' array. 
+   * Expansion data is called when an item's dropdown is created. Each function organizes a 'properties' array.
    * Each element of the array is shown at the bottom of the dropdown expansions. The description is shown above this.
    */
 
   /**
    * Call the appropriate item type's expansion data.
-   * 
+   *
    * @param {Object} htmlOptions    Currently unused - example: show secrets?
    */
   getExpandData(htmlOptions)
@@ -243,10 +243,10 @@ class ItemWfrp4e extends Item
 
   /**
    * Posts this item to chat.
-   * 
-   * postItem() prepares this item's chat data to post it to chat, setting up 
+   *
+   * postItem() prepares this item's chat data to post it to chat, setting up
    * the image if it exists, as well as setting flags so drag+drop works.
-   * 
+   *
    */
   postItem()
   {
@@ -270,7 +270,7 @@ class ItemWfrp4e extends Item
     if (chatData.img.includes("/blank.png"))
       chatData.img = null;
 
-    renderTemplate('systems/wfrp4e/templates/chat/post-item.html', chatData).then(html =>
+    renderTemplate('systems/dh2e/templates/chat/post-item.html', chatData).then(html =>
     {
       let chatOptions = WFRP_Utility.chatDataSetup(html)
       // Setup drag and drop data
@@ -284,7 +284,7 @@ class ItemWfrp4e extends Item
   }
 
   /******* ITEM CHAT DATA ***********
-   * Chat data is called when an item is posted to chat. Each function organizes a 'properties' array. 
+   * Chat data is called when an item is posted to chat. Each function organizes a 'properties' array.
    * Each element of the array is shown as a list below the description.
    */
 

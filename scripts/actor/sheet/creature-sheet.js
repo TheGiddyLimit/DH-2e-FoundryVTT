@@ -1,11 +1,11 @@
 /**
  * Provides the specific interaction handlers for Creature Sheets.
  *
- * ActorSheetWfrp4eCreature is assigned to Creature type actors, which have a very 
- * different layout in their sheet compared to the others, requiring different 
- * functionality in the main tab (creature overview), as well as the notes tab, 
+ * ActorSheetWfrp4eCreature is assigned to Creature type actors, which have a very
+ * different layout in their sheet compared to the others, requiring different
+ * functionality in the main tab (creature overview), as well as the notes tab,
  * where the user excludes traits.
- * 
+ *
  */
 class ActorSheetWfrp4eCreature extends ActorSheetWfrp4e
 {
@@ -28,16 +28,16 @@ class ActorSheetWfrp4eCreature extends ActorSheetWfrp4e
    */
   get template()
   {
-    if (!game.user.isGM && this.actor.limited) return "systems/wfrp4e/templates/actors/actor-limited.html";
-    return "systems/wfrp4e/templates/actors/creature-sheet.html";
+    if (!game.user.isGM && this.actor.limited) return "systems/dh2e/templates/actors/actor-limited.html";
+    return "systems/dh2e/templates/actors/creature-sheet.html";
   }
 
 
   /**
    * Prevents a dropdown event from immediately firing - allows for double clicking items
    * in the creature overview to open the sheet.
-   * 
-   * @param {Object} event    event fired by clicking on a dropdown element 
+   *
+   * @param {Object} event    event fired by clicking on a dropdown element
    */
   _delayedDropdown(event)
   {
@@ -70,7 +70,7 @@ class ActorSheetWfrp4eCreature extends ActorSheetWfrp4e
   /**
    * Handle traits being included or excluded - add or subtract appropriate characteristics if the
    * trait offered bonuses (Big, Elite, etc.)
-   * 
+   *
    * @param {Number} traitId    id of trait that was clicked
    * @param {Boolean} include   whether that trait is now included or excluded
    */
@@ -97,7 +97,7 @@ class ActorSheetWfrp4eCreature extends ActorSheetWfrp4e
   /**
    * Handles when the user clicks on a trait in the creature overview - shows the item summary
    * as dropdown info
-   * 
+   *
    * @param {Object} event    event fired from clicking on an item
    */
   _onCreatureItemSummary(event)
@@ -297,7 +297,7 @@ class ActorSheetWfrp4eCreature extends ActorSheetWfrp4e
 }
 
 // Register Creature Sheet
-Actors.registerSheet("wfrp4e", ActorSheetWfrp4eCreature,
+Actors.registerSheet("dh2e", ActorSheetWfrp4eCreature,
 {
   types: ["creature"],
   makeDefault: true

@@ -1,7 +1,7 @@
 /**
  * Provides the data and general interaction with Actor Sheets - Abstract class.
  *
- * ActorSheetWfrp4e provides the general interaction and data organization shared among all 
+ * ActorSheetWfrp4e provides the general interaction and data organization shared among all
  * actor sheets, as this is an abstract class, inherited by either Character, NPC, or Creature
  * specific actor sheet classes. When rendering an actor sheet, getData() is called, which is
  * a large and key function that prepares the actor data for display, processing the raw data
@@ -18,7 +18,7 @@ class ActorSheetWfrp4e extends ActorSheet {
 
   /**
    * Return the type of the current Actor.
-   * @return {String} Actor type - character, npc, or creature 
+   * @return {String} Actor type - character, npc, or creature
    */
   get actorType() {
     return this.actor.data.type;
@@ -33,10 +33,10 @@ class ActorSheetWfrp4e extends ActorSheet {
 
   /**
    * Overrides the default ActorSheet.render to add functionality.
-   * 
+   *
    * This function adds scroll position saving support, as well as tooltips for the
    * custom buttons.
-   * 
+   *
    * @param {bool} force      used upstream.
    * @param {Object} options  used upstream.
    */
@@ -54,9 +54,9 @@ class ActorSheetWfrp4e extends ActorSheet {
 
     /**
      * Saves all the scroll positions in the sheet for setScrollPos() to use
-     * 
+     *
      * All elements in the sheet that use ".save-scroll" class has their position saved to
-     * this.scrollPos array, which is used when rendering (rendering a sheet resets all 
+     * this.scrollPos array, which is used when rendering (rendering a sheet resets all
      * scroll positions by default).
      */
     _saveScrollPos()
@@ -75,9 +75,9 @@ class ActorSheetWfrp4e extends ActorSheet {
 
     /**
      * Sets all scroll positions to what was saved by saveScrollPos()
-     * 
+     *
      * All elements in the sheet that use ".save-scroll" class has their position set to what was
-     * saved by saveScrollPos before rendering. 
+     * saved by saveScrollPos before rendering.
      */
     _setScrollPos()
     {
@@ -95,10 +95,10 @@ class ActorSheetWfrp4e extends ActorSheet {
 
   /**
    * Provides the data to the template when rendering the actor sheet
-   * 
+   *
    * This function is called when rendering the sheet, where it calls the base actor class
    * to organize, process, and prepare all actor data for display. See ActorWfrp4e.prepare()
-   * 
+   *
    * @returns {Object} sheetData    Data given to the template when rendering
    */
   getData() {
@@ -111,12 +111,12 @@ class ActorSheetWfrp4e extends ActorSheet {
 
   /**
    * Takes the user-entered hp value and interprets it as relative or absolute
-   * and modifies the hp accordingly. 
-   * 
+   * and modifies the hp accordingly.
+   *
    * Takes an either relative (+12 or -5) or an absolute value (12 or 5), interprets
    * it, and processes it with the actor's hp value.
-   * 
-   * @param {String} value   user entered value 
+   *
+   * @param {String} value   user entered value
    */
   _modifyWounds(value)
   {
@@ -126,7 +126,7 @@ class ActorSheetWfrp4e extends ActorSheet {
       wounds = eval(this.actor.data.data.status.wounds.value + parseInt(value))
     else                            // Absolute
       wounds = parseInt(value);
-    
+
     this.actor.update({"data.status.wounds.value" : wounds});
   }
 
@@ -135,7 +135,7 @@ class ActorSheetWfrp4e extends ActorSheet {
   /* --------------------------------------------------------------------------------------------------------- */
   /**
    * This gargatuan list is all the interactions shared between all types of sheets. Every button click and text
-   * fields that require special interaction are handled here. See each event handler for more details. 
+   * fields that require special interaction are handled here. See each event handler for more details.
    *
   /* --------------------------------------------------------------------------------------------------------- */
 
@@ -156,7 +156,7 @@ class ActorSheetWfrp4e extends ActorSheet {
     // Other dropdowns - for other clickables (range, weapon group, reach) - display dropdown helpers
     html.find('.weapon-range, .weapon-group, .weapon-reach').click(event => this._expandInfo(event));
 
-    // Autoselect entire text 
+    // Autoselect entire text
     $("input[type=text]").focusin(function() {
       $(this).select();
     });
@@ -164,8 +164,8 @@ class ActorSheetWfrp4e extends ActorSheet {
     // Everything below here is only needed if the sheet is editable
     if (!this.options.editable) return;
 
-  
-    // Use customized input interpreter when manually changing wounds 
+
+    // Use customized input interpreter when manually changing wounds
     html.find(".wounds-value").change(event => {
         this._modifyWounds(event.target.value)
       })
@@ -196,11 +196,11 @@ class ActorSheetWfrp4e extends ActorSheet {
     }
   })
 
-  // 
+  //
   html.find('.ch-edit').focusout(async event => {
     event.preventDefault();
     // Do not proceed with an update until the listener aboves sets this flag to true or the last characteristic was tabbed
-    if (!this.charUpdateFlag && event.currentTarget.attributes["data-char"].value != "fel") 
+    if (!this.charUpdateFlag && event.currentTarget.attributes["data-char"].value != "fel")
       return                  // When this flag is true, that means the focus out was not from a tab
 
     // This conditional allows for correctly updating only a single characteristic. If the user editted only one characteristic, the above listener wasn't called, meaning no updateObj
@@ -223,7 +223,7 @@ class ActorSheetWfrp4e extends ActorSheet {
   });
 
 
-  // Similar to the handlers above, but for skills (and all actor types) 
+  // Similar to the handlers above, but for skills (and all actor types)
   html.find('.skill-advances').keydown(async event => {
     // Wait to update if user tabbed to another skill
     if (event.keyCode == 9) // Tab
@@ -243,7 +243,7 @@ class ActorSheetWfrp4e extends ActorSheet {
       let itemToEdit = duplicate(this.actor.getEmbeddedEntity("OwnedItem", itemId))
       itemToEdit.data.advances.value = Number(event.target.value);
       this.skillsToEdit.push(itemToEdit);
-      
+
       await this.actor.updateEmbeddedEntity("OwnedItem", this.skillsToEdit);
 
       this.skillsToEdit = [];
@@ -335,7 +335,7 @@ class ActorSheetWfrp4e extends ActorSheet {
   // Unarmed attack button (fist in the combat tab)
   html.find('.fist-icon').click(async event => {
     event.preventDefault();
-    let pack = game.packs.find(p => p.collection == "wfrp4e.trappings");
+    let pack = game.packs.find(p => p.collection == "dh2e.trappings");
     let weapons;
     await pack.getIndex().then(index => weapons = index);
     let unarmedId = weapons.find(w => w.name.toLowerCase() == game.i18n.localize("NAME.Unarmed").toLowerCase());
@@ -349,14 +349,14 @@ class ActorSheetWfrp4e extends ActorSheet {
       let skill = this.actor.items.find(s => s.data.name == game.i18n.localize("NAME.Dodge") && s.type == "skill")
       if (skill)
         this.actor.setupSkill(skill.data)
-      else 
+      else
         this.actor.setupCharacteristic("ag");
     })
 
     // Dodge (Arrow in the combat tab)
     html.find('.improvised-icon').click(async event => {
       event.preventDefault();
-      let pack = game.packs.find(p => p.collection == "wfrp4e.trappings");
+      let pack = game.packs.find(p => p.collection == "dh2e.trappings");
       let weapons;
       await pack.getIndex().then(index => weapons = index);
       let improvId = weapons.find(w => w.name.toLowerCase() == game.i18n.localize("NAME.Improvised").toLowerCase());
@@ -367,7 +367,7 @@ class ActorSheetWfrp4e extends ActorSheet {
     // Stomp (Creature)
     html.find('.stomp-icon').click(async event => {
       event.preventDefault();
-      let pack = game.packs.find(p => p.collection == "wfrp4e.traits");
+      let pack = game.packs.find(p => p.collection == "dh2e.traits");
       let traits;
       await pack.getIndex().then(index => traits = index);
       let stompId = traits.find(w => w.name.toLowerCase() == "weapon");
@@ -383,9 +383,9 @@ class ActorSheetWfrp4e extends ActorSheet {
       let skill = this.actor.items.find(s => s.data.name == game.i18n.localize("NAME.Endurance") && s.type == "skill")
       if (skill)
         this.actor.setupSkill(skill.data, {rest: true, tb: this.actor.data.data.characteristics.t.bonus})
-      else 
+      else
         this.actor.setupCharacteristic("t", {rest: true})
-       
+
     })
 
   // Roll a trait (right click to show dropdown description)
@@ -485,7 +485,7 @@ class ActorSheetWfrp4e extends ActorSheet {
     // Add damage values if trait hasn't been damaged before
     if (armourTrait && !armourTrait.APdamage)
         armourTrait.APdamage = {head : 0, body : 0, lArm : 0, rArm: 0, lLeg: 0, rLeg: 0};
-        
+
     // Used trait is a flag to denote whether the trait was damaged or not. If it was not, armor is damaged instead
     let usedTrait = false;;
     if (armourTrait)
@@ -547,16 +547,16 @@ class ActorSheetWfrp4e extends ActorSheet {
       // Replace -1 flag with maxAP
       if (armourToDamage.data.currentAP[location] == -1)
         armourToDamage.data.currentAP[location] = armourToDamage.data.maxAP[location]
-      
+
       if (ev.button == 2)
       {
         if (armourToDamage.data.currentAP[location] != 0)
-          armourToDamage.data.currentAP[location]--          
+          armourToDamage.data.currentAP[location]--
       }
       if (ev.button == 0)
       {
         if (armourToDamage.data.currentAP[location] != armourToDamage.data.maxAP[location])
-          armourToDamage.data.currentAP[location]++        
+          armourToDamage.data.currentAP[location]++
       }
       this.actor.updateEmbeddedEntity("OwnedItem", armourToDamage)
     }
@@ -567,12 +567,12 @@ class ActorSheetWfrp4e extends ActorSheet {
     let weapons = this.actor.prepareItems().weapons
     let shields = weapons.filter(w => w.properties.qualities.find(p => p.toLowerCase().includes(game.i18n.localize("PROPERTY.Shield").toLowerCase())))
     let shieldDamaged = false;
-    // If for some reason using multiple shields...damage the first one available 
+    // If for some reason using multiple shields...damage the first one available
     for (let s of shields)
     {
       let shield = duplicate(this.actor.getEmbeddedEntity("OwnedItem", s._id));
       let shieldQualityValue = s.properties.qualities.find(p => p.toLowerCase().includes(game.i18n.localize("PROPERTY.Shield").toLowerCase())).split(" ")[1];
-      
+
       if (!shield.data.APdamage)
         shield.data.APdamage = 0;
       // Right click - damage
@@ -615,7 +615,7 @@ class ActorSheetWfrp4e extends ActorSheet {
     await this.actor.updateEmbeddedEntity("OwnedItem", spell);
   });
 
-  // Manually increment/decrement spell SL for channelling 
+  // Manually increment/decrement spell SL for channelling
   html.find('.sl-counter').mousedown(async ev => {
     let itemId = $(ev.currentTarget).parents(".item").attr("data-item-id");
     const spell = duplicate(this.actor.getEmbeddedEntity("OwnedItem", itemId))
@@ -658,7 +658,7 @@ class ActorSheetWfrp4e extends ActorSheet {
 
       else if (toggle == "encumbrance")
         newFlags.autoCalcEnc = !newFlags.autoCalcEnc;
-        
+
       this.actor.update({'flags' : newFlags})
     }
   });
@@ -701,7 +701,7 @@ class ActorSheetWfrp4e extends ActorSheet {
   // Increment/Decrement Fate/Fortune/Resilience/Resolve
   html.find('.metacurrency-value').mousedown(async ev =>  {
     let type = $(ev.currentTarget).attr("data-point-type");
-    let newValue = ev.button == 0 ? this.actor.data.data.status[type].value + 1 : this.actor.data.data.status[type].value - 1 
+    let newValue = ev.button == 0 ? this.actor.data.data.status[type].value + 1 : this.actor.data.data.status[type].value - 1
     this.actor.update({[`data.status.${type}.value`] : newValue})
   });
 
@@ -728,11 +728,11 @@ class ActorSheetWfrp4e extends ActorSheet {
       itemId = li.attr("data-item-id");
       if(this.actor.getEmbeddedEntity("OwnedItem", itemId).name == "Boo")
       {
-        AudioHelper.play({src : "systems/wfrp4e/sounds/squeek.wav"}, false)
+        AudioHelper.play({src : "systems/dh2e/sounds/squeek.wav"}, false)
         return // :^)
       }
-      
-      renderTemplate('systems/wfrp4e/templates/chat/delete-item-dialog.html').then(html => {
+
+      renderTemplate('systems/dh2e/templates/chat/delete-item-dialog.html').then(html => {
         new Dialog({
         title: "Delete Confirmation",
         content: html,
@@ -764,7 +764,7 @@ class ActorSheetWfrp4e extends ActorSheet {
     this.actor.updateEmbeddedEntity("OwnedItem", item);
   });
 
-  // Toggle Count Enc for containers 
+  // Toggle Count Enc for containers
   html.find('.toggle-enc').click(ev => {
     let itemId = $(ev.currentTarget).parents(".item").attr("data-item-id");
     let item = duplicate(this.actor.getEmbeddedEntity("OwnedItem", itemId))
@@ -792,8 +792,8 @@ class ActorSheetWfrp4e extends ActorSheet {
       item.data.worn = !item.data.worn;
       equippedState = item.data.worn
     }
-    
-    WFRP_Audio.PlayContextAudio({item : item, action : "equip", outcome : equippedState})    
+
+    WFRP_Audio.PlayContextAudio({item : item, action : "equip", outcome : equippedState})
     this.actor.updateEmbeddedEntity("OwnedItem", item);
   });
 
@@ -836,15 +836,15 @@ class ActorSheetWfrp4e extends ActorSheet {
     let itemType = $(ev.currentTarget).attr("data-type")
     if (itemType == "ingredient") itemType = "trapping"
     let items = duplicate(this.actor.data.items.filter(x => x.type == itemType))
-    
+
     for (let i of items)
     {
       let duplicates = items.filter(x => x.name == i.name) // Find all the items with the same name
       if (duplicates.length > 1)
       {
         let newQty = duplicates.reduce((prev, current) => prev + current.data.quantity.value, 0) // Sum the quantity of all items with the same name
-        i.data.quantity.value = newQty                                                           // Change the quantity to the sum 
-      }            
+        i.data.quantity.value = newQty                                                           // Change the quantity to the sum
+      }
     }
 
     // Array that will hold the aggregated items (with *no duplicates*)
@@ -862,7 +862,7 @@ class ActorSheetWfrp4e extends ActorSheet {
     }
   })
 
-  
+
   // Right click - duplicate option for trappings
   html.find(".inventory .item .item-name").mousedown(ev => {
     if (ev.button == 2)
@@ -897,7 +897,7 @@ class ActorSheetWfrp4e extends ActorSheet {
   html.find('.input.species').change(async event => {
     if (this.actor.data.type == "character")
       return
-    if (game.settings.get("wfrp4e", "npcSpeciesCharacteristics"))
+    if (game.settings.get("dh2e", "npcSpeciesCharacteristics"))
     {
       let species = event.target.value;
       await this.actor.update({"data.details.species.value" : species});
@@ -911,7 +911,7 @@ class ActorSheetWfrp4e extends ActorSheet {
         {
           characteristics[c].initial = initialValues[c];
         }
-        
+
 
         await this.actor.update({'data.characteristics' : characteristics})
         await this.actor.update({"data.details.move.value" : WFRP_Utility.speciesMovement(species) || 4})
@@ -936,9 +936,9 @@ class ActorSheetWfrp4e extends ActorSheet {
         // Characteristic button
         case "C":
           // TODO: this could do with a refactor
-          // Characteristics is a bit confusing due to 
+          // Characteristics is a bit confusing due to
 
-          // creatureMethod means -10 + 2d10 
+          // creatureMethod means -10 + 2d10
           let creatureMethod = false;
           let characteristics = duplicate (this.actor.data.data.characteristics);
 
@@ -1003,7 +1003,7 @@ class ActorSheetWfrp4e extends ActorSheet {
     }
     catch (error)
     {
-      console.log("wfrp4e | Could not randomize: " + error)
+      console.log("dh2e | Could not randomize: " + error)
     }
 
   });
@@ -1063,7 +1063,7 @@ class ActorSheetWfrp4e extends ActorSheet {
   /* -------------------------------------------- Private Functions ------------------------------------------ */
   /* --------------------------------------------------------------------------------------------------------- */
   /**
-   * These functions are helpers for sheet html interaction or functionality. Mostly handling drag/drop and 
+   * These functions are helpers for sheet html interaction or functionality. Mostly handling drag/drop and
    * dropdown events.
    *
   /* --------------------------------------------------------------------------------------------------------- */
@@ -1072,12 +1072,12 @@ class ActorSheetWfrp4e extends ActorSheet {
 
   /**
    * Sets up the data transfer within a drag and drop event. This function is triggered
-   * when the user starts dragging an inventory item, and dataTransfer is set to the 
+   * when the user starts dragging an inventory item, and dataTransfer is set to the
    * relevant data needed by the _onDrop function. See that for how drop events
    * are handled.
-   * 
+   *
    * @private
-   * 
+   *
    * @param {Object} event    event triggered by item dragging
    */
   _onDragItemStart(event) {
@@ -1095,19 +1095,19 @@ class ActorSheetWfrp4e extends ActorSheet {
   /**
    * Handles all different types of drop events and processes the transfer data
    * for each type.
-   * 
-   * Current types: 
+   *
+   * Current types:
    * Inventory tab - placing trappings in containers
    * Posted Items - Dragging an item posted from chat onto the character sheet
    * Generation - Dragging any character generation result onto the character sheet (which has its own subtypesS)
-   * 
+   *
    * If you want to see how these (except inventory tab) drag events are generated, see the renderChatMessage hook
-   * 
-   * @private 
+   *
+   * @private
    * @param {Object} event     event triggered by item dropping
    */
   async _onDrop(event) // TODO: This function needs a heavy refactor because it's quite gross
-  { 
+  {
     var dragData = event.dataTransfer.getData("text/plain");
     var dropID = $(event.target).parents(".item").attr("data-item-id"); // Only relevant if container drop
 
@@ -1117,14 +1117,14 @@ class ActorSheetWfrp4e extends ActorSheet {
       var dragItem = JSON.parse(dragData)
       if (dragItem.data._id == dropID) // Prevent placing a container within itself (we all know the cataclysmic effects that can cause)
         throw "";
-      else if (dragItem.data.type == "container" && $(event.target).parents(".item").attr("last-container")) 
+      else if (dragItem.data.type == "container" && $(event.target).parents(".item").attr("last-container"))
           throw game.i18n.localize("SHEET.NestedWarning")
 
-      else if (dragItem.data.type == "container") 
+      else if (dragItem.data.type == "container")
       {
         // If container A has both container B and container C, prevent placing container B into container C without first removing B from A
         // This resolves a lot of headaches around container loops and issues of that natures
-        if (JSON.parse(dragData).root == $(event.target).parents(".item").attr("root")) 
+        if (JSON.parse(dragData).root == $(event.target).parents(".item").attr("root"))
         {
           ui.notifications.error("Remove the container before changing its location");
           throw game.i18n.localize("SHEET.LocationWarning");
@@ -1202,7 +1202,7 @@ class ActorSheetWfrp4e extends ActorSheet {
         // Advanced find function, returns the talent the user expects it to return, even with talents not included in the compendium (Etiquette (whatever))
         item = await WFRP_Utility.findTalent(transfer.name)
       }
-      else 
+      else
       {
         return
       }
@@ -1244,13 +1244,13 @@ class ActorSheetWfrp4e extends ActorSheet {
       let moneyItem;
       switch(type)
       {
-        case 'b' : 
+        case 'b' :
         moneyItem = money.find(i => i.name == game.i18n.localize("NAME.BP"));
         break;
-        case 's' : 
+        case 's' :
         moneyItem = money.find(i => i.name == game.i18n.localize("NAME.SS"));
         break;
-        case 'g' : 
+        case 'g' :
         moneyItem = money.find(i => i.name == game.i18n.localize("NAME.GC"));
         break;
       }
@@ -1277,13 +1277,13 @@ class ActorSheetWfrp4e extends ActorSheet {
 
 
   /**
-   * All item types have a drop down description, this handles what is 
+   * All item types have a drop down description, this handles what is
    * displayed for each item type and adds additional functionalities
    * and listeners.
-   * 
+   *
    * @private
-   * 
-   * @param {Object} event    event generated by the click 
+   *
+   * @param {Object} event    event generated by the click
    */
   _onItemSummary(event)
   {
@@ -1291,11 +1291,11 @@ class ActorSheetWfrp4e extends ActorSheet {
     let li = $(event.currentTarget).parents(".item"),
       item = this.actor.items.find(i => i.data._id == li.attr("data-item-id")),
       // Call the item's expandData() function which gives us what to display
-      expandData = item.getExpandData( 
+      expandData = item.getExpandData(
       {
         secrets: this.actor.owner
       });
-  
+
     // Toggle expansion for an item
     if (li.hasClass("expanded")) // If expansion already shown - remove
     {
@@ -1307,20 +1307,20 @@ class ActorSheetWfrp4e extends ActorSheet {
       // Add a div with the item summary belowe the item
       let div = "";
       div = $(`<div class="item-summary">${expandData.description.value}</div>`);
-  
+
       let props = $(`<div class="item-properties"></div>`);
       expandData.properties.forEach(p => props.append(`<span class="tag">${p}</span>`));
       div.append(props);
       li.append(div.hide());
       div.slideDown(200);
-  
+
       // Clickable tags
       // Post an Item Quality/Flaw
       div.on("click", ".item-property", ev =>
       {
-        WFRP_Utility.postProperty(ev.target.text) 
+        WFRP_Utility.postProperty(ev.target.text)
       })
-  
+
       // Roll a career income skill
       div.on("click", ".career-income", ev =>
       {
@@ -1348,27 +1348,27 @@ class ActorSheetWfrp4e extends ActorSheet {
     }
     li.toggleClass("expanded");
   }
-  
+
   /**
    * Summary for specific property selected - like a Quality description in the combat tab.
    * Works also for "Special" and "Special Ammo" properties - user entered values in the item
    * sheets.
-   * 
-   * 
+   *
+   *
    * @private
    * @param {Object} event    event triggered by clicking on a wweapon/armor property
    */
   _expandProperty(event)
   {
     event.preventDefault();
-  
+
     let li = $(event.currentTarget).parents(".item"),
       property = event.target.text, // Proprety clicked on
       properties = mergeObject(WFRP_Utility.qualityList(), WFRP_Utility.flawList()), // Property names
       propertyDescr = Object.assign(duplicate(WFRP4E.qualityDescriptions), WFRP4E.flawDescriptions); // Property descriptions
-  
+
     property = property.replace(/,/g, '').trim(); // Remove commas/whitespace
-  
+
     let propertyKey = "";
     if (property == "Special Ammo") // Special Ammo comes from user-entry in an Ammo's Special box
     {
@@ -1396,12 +1396,12 @@ class ActorSheetWfrp4e extends ActorSheet {
     {
       propertyKey = WFRP_Utility.findKey(WFRP_Utility.parsePropertyName(property), properties)
     }
-  
+
     let propertyDescription = "<b>" + property + "</b>" + ": " + propertyDescr[propertyKey];
     if (propertyDescription.includes("(Rating)"))
       propertyDescription = propertyDescription.replace("(Rating)", property.split(" ")[1])
-  
-    // Toggle expansion 
+
+    // Toggle expansion
     if (li.hasClass("expanded"))
     {
       let summary = li.children(".item-summary");
@@ -1415,13 +1415,13 @@ class ActorSheetWfrp4e extends ActorSheet {
     }
     li.toggleClass("expanded");
   }
-  
+
   /**
    * Summary for specific property selected - like a Quality description in the combat tab.
    * Works also for "Special" and "Special Ammo" properties - user entered values in the item
    * sheets.
-   * 
-   * 
+   *
+   *
    * @private
    * @param {Object} event    event triggered by clicking on range, reach, etc.
    */
@@ -1459,8 +1459,8 @@ class ActorSheetWfrp4e extends ActorSheet {
       reachKey = WFRP_Utility.findKey(reach, WFRP4E.weaponReaches);
       expansionText = WFRP4E.reachDescription[reachKey];
     }
-  
-    // Toggle expansion 
+
+    // Toggle expansion
     if (li.hasClass("expanded"))
     {
       let summary = li.children(".item-summary");
@@ -1471,38 +1471,38 @@ class ActorSheetWfrp4e extends ActorSheet {
       let div = $(`<div class="item-summary">${expansionText}</div>`);
       li.append(div.hide());
       div.slideDown(200);
-  
+
       // When a rangeband is clicked, start a test at that difficulty
       div.on("click", ".range-click", ev =>
       {
         let difficulty = $(ev.currentTarget).attr("data-range")
-  
+
         let itemId = $(event.currentTarget).parents(".item").attr("data-item-id");
         let weapon = duplicate(this.actor.getEmbeddedEntity("OwnedItem", itemId))
         if (weapon)
           this.actor.setupWeapon(duplicate(weapon), {difficulty: difficulty});
       })
-  
+
     }
     li.toggleClass("expanded");
-  
-  
+
+
   }
-  
-  
+
+
   /**
    * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
    * @private
    * @param {Object} event    event triggered by clicking on the + button for any item list
-   *  
+   *
    */
   _onItemCreate(event)
   {
     event.preventDefault();
     let header = event.currentTarget,
       data = duplicate(header.dataset);
-  
-  
+
+
     // Conditional for creating skills from the skills tab - sets to the correct skill type depending on column
     if (event.currentTarget.attributes["data-type"].value == "skill")
     {
@@ -1511,7 +1511,7 @@ class ActorSheetWfrp4e extends ActorSheet {
         "data.advanced.value": event.currentTarget.attributes["data-skill-type"].value
       });
     }
-  
+
     if (data.type == "trapping")
       data = mergeObject(data,
       {
@@ -1526,12 +1526,12 @@ class ActorSheetWfrp4e extends ActorSheet {
       })
       data.type = "trapping"
     }
-  
+
     // Conditional for creating spells/prayers from their tabs, create the item with the correct type
     else if (data.type == "spell" || data.type == "prayer")
     {
       let itemSpecification = event.currentTarget.attributes[`data-${data.type}-type`].value;
-  
+
       if (data.type == "spell")
       {
         data = mergeObject(data,
@@ -1547,17 +1547,17 @@ class ActorSheetWfrp4e extends ActorSheet {
         });
       }
     }
-    data["img"] = "systems/wfrp4e/icons/blank.png";
+    data["img"] = "systems/dh2e/icons/blank.png";
     data["name"] = `New ${data.type.capitalize()}`;
     this.actor.createEmbeddedEntity("OwnedItem", data);
   }
-  
 
-  
-  
+
+
+
   /**
    * Duplicates an owned item given its id.
-   * 
+   *
    * @param {Number} itemId   Item id of the item being duplicated
    */
   duplicateItem(itemId)

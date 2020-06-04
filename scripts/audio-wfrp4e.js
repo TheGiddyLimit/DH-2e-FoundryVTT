@@ -1,17 +1,17 @@
-class WFRP_Audio 
+class WFRP_Audio
 {
     static PlayContextAudio(context)
     {
         this.MatchContextAudio(context).then(sound => {
-            console.log(`wfrp4e | Playing Sound: ${sound.file}`)
+            console.log(`dh2e | Playing Sound: ${sound.file}`)
             AudioHelper.play({src : sound.file}, sound.global)
         })
-    }   
+    }
 
     static FindContext(testResult)
     {
         let context = undefined
-        
+
         if (testResult.skill)
         {
           if (testResult.skill.name == game.i18n.localize("NAME.ConsumeAlcohol"))
@@ -34,8 +34,8 @@ class WFRP_Audio
           context = {item : testResult.weapon, action: "fire"}
           if (testResult.extra.misfire)
             context.action = "misfire"
-          
-          if (testResult.weapon.rangedWeaponType && testResult.roll > testResult.target && 
+
+          if (testResult.weapon.rangedWeaponType && testResult.roll > testResult.target &&
             (testResult.weapon.data.weaponGroup.value === game.i18n.localize("SPEC.Bow")
           || testResult.weapon.data.weaponGroup.value === game.i18n.localize("SPEC.Crossbow")
           || testResult.weapon.data.weaponGroup.value === game.i18n.localize("SPEC.Blackpowder")
@@ -61,7 +61,7 @@ class WFRP_Audio
               if (testResult.spell.damage)
                 context.outcome = "damage"
             }
-            
+
             if (testResult.extra.minormis || testResult.extra.majormis)
               context = {item : testResult.spell, action : "miscast"}
         }
@@ -69,7 +69,7 @@ class WFRP_Audio
         {
             if (testResult.description == game.i18n.localize("ROLL.PrayGranted"))
               context = {item : testResult.prayer, action : "cast"}
-            
+
             if (testResult.extra.wrath)
             context = {item : testResult.prayer, action : "miscast"}
         }
@@ -78,7 +78,7 @@ class WFRP_Audio
     }
 
 
-    
+
     /** CONTEXTUAL MODEL
      *  context = {
      *      action : equip, cast, lose, gain, etc.
@@ -89,13 +89,13 @@ class WFRP_Audio
 
     static async MatchContextAudio(context)
     {
-      if (!game.settings.get("wfrp4e", "soundEffects") || !context)
+      if (!game.settings.get("dh2e", "soundEffects") || !context)
         return {}
-        
+
       try {
         let files = ""
         let file, group;
-        await FilePicker.browse("user", `systems/wfrp4e/sounds`).then(resp => {
+        await FilePicker.browse("user", `systems/dh2e/sounds`).then(resp => {
           files = resp.files
         })
           if (context.action == "hit")
@@ -111,7 +111,7 @@ class WFRP_Audio
             else if(group == game.i18n.localize("SPEC.Bow").toLowerCase())
               file = "weapon_bow"
             else if(group == game.i18n.localize("SPEC.Fencing").toLowerCase() || group == game.i18n.localize("SPEC.Parry").toLowerCase() || group == game.i18n.localize("SPEC.TwoHanded").toLowerCase())
-              file = context.action == "fire" ? "weapon-" : "weapon_sword" 
+              file = context.action == "fire" ? "weapon-" : "weapon_sword"
             else if(group == game.i18n.localize("SPEC.Flail").toLowerCase() && context.action == "fire")
             {
               file = "weapon_flail-"
@@ -167,7 +167,7 @@ class WFRP_Audio
             break;
           case "money":
             file = "money";
-            break;        
+            break;
           case "shield":
             file = "weapon_shield";
             break;
@@ -182,11 +182,11 @@ class WFRP_Audio
         if (context.item.special == "warhammer")
           file = "warhammer"
         files = files.filter(f => f.includes(file))
-    
+
         if(context.item.type == "weapon")
         {
           globalSound = true;
-          
+
           if(context.action == "miss")
             files = files.filter(f => f.includes("-miss"))
           else if(context.action == "misfire")
@@ -197,7 +197,7 @@ class WFRP_Audio
               files = files.filter(f => f.includes("-fire"))
             else if(file != "weapon_bomb")
               files = files.filter(f => f.includes("-swing"))
-            else 
+            else
               files = files.filter(f => f.includes("-throw"))
           }
           else if (context.action == "load")
@@ -230,7 +230,7 @@ class WFRP_Audio
         {
           files = files.filter(f => f.includes("hit"))
         }
-    
+
         if(context.item.type == "spell")
         {
           if(context.action == "memorize")
@@ -241,7 +241,7 @@ class WFRP_Audio
           {
             if (context.outcome == "damage")
               files = files.filter(f => f.includes("damage-cast"))
-            else 
+            else
               files = files.filter(f => f.includes("-cast") && !f.includes("damage"))
             globalSound = true;
           }
@@ -251,7 +251,7 @@ class WFRP_Audio
             globalSound = true;
           }
         }
-    
+
         if(context.item.type == "prayer")
         {
           globalSound = true;
@@ -260,7 +260,7 @@ class WFRP_Audio
           else
             files = files.filter(f => f.includes("miscast"))
         }
-    
+
         if(context.action == "hit")
         {
           globalSound = true;
@@ -268,7 +268,7 @@ class WFRP_Audio
             files = files.filter(f => f.includes(context.item.armourType))
           else if (context.item.type == "armour")
             files = files.filter(f => f.includes("armour"))
-          else 
+          else
             files = files.filter(f => !f.includes("armour")) // all non-armour sounds
 
           if (context.outcome == "normal")
@@ -283,22 +283,22 @@ class WFRP_Audio
           if(context.outcome == "crit_impale")
             files = files.filter(f => f.includes("crit_impale"))
         }
-    
+
         if(context.item.type == "skill")
         {
           if(context.action == "consumeAlcohol")
             files = files.filter(f => f.includes(`consumeAlcohol-${context.outcome == "fail" ? 'fail' : 'success'}`))
-          if(context.action == "stealth")    
+          if(context.action == "stealth")
             files = files.filter(f => f.includes(`stealth-${context.outcome == "fail" ? 'fail' : 'success'}`))
           if (context.action == "pickLock")
             files = files.filter(f => f.includes(context.action))
         }
-    
+
         return {file : files[new Roll(`1d${files.length}-1`).roll().total], global : globalSound}
       }
       catch (e)
       {
-        console.log("wfrp4e | Sound Context Error: " + e)
+        console.log("dh2e | Sound Context Error: " + e)
       }
     }
 }
