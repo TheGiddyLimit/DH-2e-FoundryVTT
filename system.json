@@ -46,16 +46,18 @@
     "./libs/pixi-filters.js",
     "./pixi/aoe.js"
   ],
-  "styles": ["./css/wfrp4e.css"],
+  "styles": [
+    "./css/wfrp4e.css"
+  ],
   "packs": [
-  	{
+    {
       "name": "bestiary",
       "label": "Bestiary",
       "system": "dh2e",
       "module": "dh2e",
       "path": "./packs/bestiary.db",
       "entity": "Actor",
-      "tag" : "actor"
+      "tag": "actor"
     },
     {
       "name": "careers",
@@ -64,7 +66,7 @@
       "module": "dh2e",
       "path": "./packs/careers.db",
       "entity": "Item",
-      "tag" : "career"
+      "tag": "career"
     },
     {
       "name": "criticals",
@@ -73,17 +75,16 @@
       "module": "dh2e",
       "path": "./packs/criticals.db",
       "entity": "Item",
-      "tag" : "critical"
-
+      "tag": "critical"
     },
-  	 {
+    {
       "name": "skills",
       "label": "Skills",
       "system": "dh2e",
       "module": "dh2e",
       "path": "./packs/skills.db",
       "entity": "Item",
-      "tag" : "skill"
+      "tag": "skill"
     },
     {
       "name": "talents",
@@ -92,7 +93,7 @@
       "module": "dh2e",
       "path": "./packs/talents.db",
       "entity": "Item",
-      "tag" : "talent"
+      "tag": "talent"
     },
     {
       "name": "traits",
@@ -101,7 +102,7 @@
       "module": "dh2e",
       "path": "./packs/traits.db",
       "entity": "Item",
-      "tag" : "trait"
+      "tag": "trait"
     },
     {
       "name": "psychologies",
@@ -110,7 +111,7 @@
       "entity": "Item",
       "module": "dh2e",
       "system": "dh2e",
-      "tag" : "pyschology"
+      "tag": "pyschology"
     },
     {
       "name": "mutations",
@@ -119,7 +120,7 @@
       "entity": "Item",
       "module": "dh2e",
       "system": "dh2e",
-      "tag" : "mutation"
+      "tag": "mutation"
     },
     {
       "name": "injuries",
@@ -128,7 +129,7 @@
       "entity": "Item",
       "module": "dh2e",
       "system": "dh2e",
-      "tag" : "injury"
+      "tag": "injury"
     },
     {
       "name": "diseases",
@@ -137,7 +138,7 @@
       "entity": "Item",
       "module": "dh2e",
       "system": "dh2e",
-      "tag" : "disease"
+      "tag": "disease"
     },
     {
       "name": "spells",
@@ -146,16 +147,16 @@
       "entity": "Item",
       "module": "dh2e",
       "system": "dh2e",
-      "tag" : "spell"
+      "tag": "spell"
     },
-	{
+    {
       "name": "prayers",
       "label": "Prayers",
       "path": "./packs/prayers.db",
       "entity": "Item",
       "module": "dh2e",
       "system": "dh2e",
-      "tag" : "prayer"
+      "tag": "prayer"
     },
     {
       "name": "trappings",
@@ -164,7 +165,7 @@
       "entity": "Item",
       "module": "dh2e",
       "system": "dh2e",
-      "tag" : "trapping"
+      "tag": "trapping"
     }
   ],
   "languages": [
@@ -175,15 +176,15 @@
     }
   ],
   "initiative": "@characteristics.i.value + @characteristics.ag.value/100",
-  "gridDistance": 2,
-  "gridUnits": "yd",
+  "gridDistance": 1,
+  "gridUnits": "m",
   "primaryTokenAttribute": "status.wounds",
   "secondaryTokenAttribute": "status.advantage",
-  "minimumCoreVersion" : "0.6.0",
-  "compatibleCoreVersion" : "0.6.0",
-  "templateVersion":2,
+  "minimumCoreVersion": "0.6.0",
+  "compatibleCoreVersion": "0.6.0",
+  "templateVersion": 2,
   "socket": true,
-  "manifest" :  "https://raw.githubusercontent.com/CatoThe1stElder/WFRP-4th-Edition-FoundryVTT/stable/system.json",
-  "download" :  "https://github.com/CatoThe1stElder/WFRP-4th-Edition-FoundryVTT/archive/stable.zip",
-  "url" : "https://github.com/CatoThe1stElder/WFRP-4th-Edition-FoundryVTT"
+  "manifest": "https://raw.githubusercontent.com/TheGiddyLimit/DH-2e-FoundryVTT/stable/system.json",
+  "download": "https://github.com/TheGiddyLimit/DH-2e-FoundryVTT/archive/stable.zip",
+  "url": "https://github.com/TheGiddyLimit/DH-2e-FoundryVTT"
 }
